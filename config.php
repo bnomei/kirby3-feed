@@ -4,7 +4,7 @@ Kirby::plugin('bnomei/feed', [
     'options' => [
         'cache' => true,
         'debugforce' => true,
-        'expires' => (60*24), // minutes
+        'expires' => (60*24*7), // minutes
     ],
     'snippets' => [
         'feed/rss' => __DIR__ . '/snippets/feed/rss.php',
