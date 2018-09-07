@@ -1,0 +1,37 @@
+{
+    "name": "bnomei/kirby3-feed",
+    "type": "plugin",
+    "version": "1.0.0",
+    "description": "Generate a RSS-Feed from a Pages-Collection",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "config.php"
+        ],
+        "psr-4": {
+            "Bnomei\\": "classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bruno Meilick",
+            "email": "b@bnomei.com"
+        }
+    ],
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/k-next/kirby"
+        }
+      ],
+    "require": {
+        "getkirby/cms": "dev-master as 3.0.0"
+    },
+    "require-dev" : {
+    },
+    "scripts": {
+        "build": "composer update --ignore-platform-reqs; composer dumpautoload -o;",
+        "zip": "rm kirby3-feed.zip; composer update --ignore-platform-reqs; composer remove getkirby/cms; composer dumpautoload -o; zip -r kirby3-feed.zip . -x *.git*; composer require getkirby/cms:'dev-master as 3.0.0' --ignore-platform-reqs; composer dumpautoload -o;"
+    },
+    "minimum-stability": "beta"
+}
