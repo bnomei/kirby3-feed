@@ -10,7 +10,6 @@ This plugin is free but if you use it in a commercial project please consider to
 
 You can use this in a template for a dedicated feed page, in a template controller or a route.
 
-**
 ```php
 <?php
 $options = [
@@ -80,5 +79,5 @@ It is discouraged to use this plugin in any project that promotes racism, sexism
 
 ## Credits
 
-based on V2 versions of
+based on V2 version of
 - https://github.com/getkirby-plugins/feed-plugin
