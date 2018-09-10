@@ -2,9 +2,9 @@
 
 ![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-feed.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg)
 
-Generate a RSS-Feed from a Pages-Collection.
+Generate a RSS/JSON-Feed from a Pages-Collection.
 
-This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/2.5).
+This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/5).
 
 ## Usage
 
@@ -30,7 +30,7 @@ echo page('blog')->children()->visible()->flip()->limit(10)->feed($options);
     'datefield'   => 'date',
     'textfield'   => 'text',
     'modified'    => time(),
-    'snippet'     => 'feed/json',
+    'snippet'     => 'feed/rss', // or 'feed/json
 ]
 ```
 

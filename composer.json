@@ -2,7 +2,7 @@
     "name": "bnomei/kirby3-feed",
     "type": "plugin",
     "version": "1.0.2",
-    "description": "Generate a RSS-Feed from a Pages-Collection",
+    "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
     "license": "MIT",
     "autoload": {
         "files": [
@@ -25,7 +25,6 @@
         }
       ],
     "require": {
-        "getkirby/cms": "dev-master as 3.0.0"
     },
     "require-dev" : {
     },
