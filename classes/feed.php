@@ -22,6 +22,27 @@ class Feed
         return static::cache()->flush();
     }
 
+    public static function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+    public static function isXml($content)
+    {
+        $content = trim($content);
+        if (empty($content)) {
+            return false;
+        }
+        if (stripos($content, '<!DOCTYPE html>') !== false) {
+            return false;
+        }
+        libxml_use_internal_errors(true);
+        simplexml_load_string($content);
+        $errors = libxml_get_errors();
+        libxml_clear_errors();
+        return empty($errors);
+    }
+
     public static function feed($pages, $options = [], $force = null) {
         if($force == null && option('debug') && option('bnomei.feed.debugforce')) {
             $force = true;
