@@ -79,5 +79,6 @@ It is discouraged to use this plugin in any project that promotes racism, sexism
 
 ## Credits
 
-based on V2 version of
+based on K2 versions of
 - https://github.com/getkirby-plugins/feed-plugin
+- https://github.com/stefanzweifel/kirby-json-feed
