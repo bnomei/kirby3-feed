@@ -1,7 +1,5 @@
 <?php
 
-    header('Content-Type:application/json; charset=utf-8');
-
     $pages = $items;
     $items = [];
     foreach ($pages as $item) {

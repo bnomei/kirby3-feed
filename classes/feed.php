@@ -18,11 +18,13 @@ class Feed
         return static::$cache;
     }
 
-    public static function flush() {
+    public static function flush()
+    {
         return static::cache()->flush();
     }
 
-    public static function isJson($string) {
+    public static function isJson($string)
+    {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
@@ -43,17 +45,18 @@ class Feed
         return empty($errors);
     }
 
-    public static function feed($pages, $options = [], $force = null) {
-        if($force == null && option('debug') && option('bnomei.feed.debugforce')) {
+    public static function feed($pages, $options = [], $force = null)
+    {
+        if ($force == null && option('debug') && option('bnomei.feed.debugforce')) {
             $force = true;
         }
         $key = [];
-        foreach($pages as $p) {
+        foreach ($pages as $p) {
             $key[] = $p->modified();
         }
         $key = md5(\implode(',', $key));
         $response = $force ? null : static::cache()->get($key);
-        if(!$response) {
+        if (!$response) {
             $snippet = \Kirby\Toolkit\A::get($options, 'snippet', 'feed/rss');
             $response = snippet($snippet, static::data($pages, $options), true);
             static::cache()->set(
@@ -65,8 +68,8 @@ class Feed
         return $response;
     }
 
-    public static function data($pages, $options = []) {
-
+    public static function data($pages, $options = [])
+    {
         $defaults = array(
             'url'         => site()->url(),
             'title'       => 'Feed',

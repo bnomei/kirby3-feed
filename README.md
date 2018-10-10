@@ -57,6 +57,9 @@ return [
 
 ## Settings
 
+**mime**
+- default: `null` to autodetect json or rss-xml otherwise enforce output with a certain [mime type](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php)
+
 **expires**
 - default: `60*24*7` in minutes
 
