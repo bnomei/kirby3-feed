@@ -60,6 +60,14 @@ return [
 ];
 ```
 
+**Sorting by date**
+Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
+```php
+$feed = page('blog')->children()->visible()->sortBy(function ($page) {
+ return $page->date()->toDate();
+}, 'desc')->limit(10)->feed($options);
+```
+
 ## Settings
 
 **mime**
