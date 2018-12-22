@@ -26,6 +26,9 @@ echo page('blog')->children()->visible()->flip()->limit(10)->feed($options);
 ```
 
 **options array defaults**
+
+If you use these defaults you need to provide the fields `date (type: date)` and `text (type: text)`.
+
 ```php
 [
     'url'         => site()->url(),
