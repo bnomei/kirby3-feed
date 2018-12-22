@@ -25,6 +25,6 @@ Kirby::plugin('bnomei/feed', [
                 return new Response($string, 'application/rss+xml');
             }
             return $return;
-        },
-    ],
+        }
+    ]
 ]);
