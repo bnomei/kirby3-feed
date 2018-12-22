@@ -1,9 +1,24 @@
 {
     "name": "bnomei/kirby3-feed",
     "type": "plugin",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno Meilick",
+            "email": "b@bnomei.com"
+        }
+    ],
+    "keywords": [
+        "kirby3",
+        "kirby3-cms",
+        "kirby3-plugin",
+        "rss-feed",
+        "rss",
+        "feed",
+        "json"
+    ],
     "autoload": {
         "files": [
             "config.php"
@@ -12,26 +27,31 @@
             "Bnomei\\": "classes/"
         }
     },
-    "authors": [
-        {
-            "name": "Bruno Meilick",
-            "email": "b@bnomei.com"
-        }
-    ],
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
     "repositories": [
         {
-          "type": "vcs",
-          "url": "https://github.com/k-next/kirby"
+            "type": "vcs",
+            "url": "https://github.com/k-next/kirby"
         }
-      ],
+    ],
     "require": {
-        "getkirby/cms": "dev-master as 3.0.0"
+        "php": ">=7.1.0",
+        "getkirby/cms": "^3.0.0-RC-2.0"
     },
-    "require-dev" : {
+    "conflict": {
+        "getkirby/kirby": "<3.0"
     },
     "scripts": {
-        "build": "composer update --ignore-platform-reqs; composer dumpautoload -o;",
-        "zip": "rm kirby3-feed.zip; composer update --ignore-platform-reqs; composer remove getkirby/cms; composer dumpautoload -o; zip -r kirby3-feed.zip . -x *.git*; composer require getkirby/cms:'dev-master as 3.0.0' --ignore-platform-reqs; composer dumpautoload -o;"
-    },
-    "minimum-stability": "beta"
+        "zip": [
+            "rm kirby3-feed.zip",
+            "composer install --no-dev",
+            "composer remove getkirby/cms",
+            "composer dumpautoload -o",
+            "zip -r kirby3-feed.zip . -x *.git*",
+            "composer require getkirby/cms:'^3.0.0-RC-2.0'"
+        ]
+    }
 }
