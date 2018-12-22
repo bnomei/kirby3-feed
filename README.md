@@ -63,6 +63,16 @@ return [
 ];
 ```
 
+**HTML head element**
+rss xml
+```php
+<link rel="alternate" type="application/rss+xml" title="Latest articles" href="<?= site()->url() ?>/feed"/>
+```
+or rss json
+```php
+<link rel="alternate" type="application/json" title="Latest articles" href="<?= site()->url() ?>/feed"/>
+```
+
 **Sorting by date**
 Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
 ```php
