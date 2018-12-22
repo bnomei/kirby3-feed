@@ -43,6 +43,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 ```
 
 **virtual page in site/config.php**
+
 ```php
 return [
     'routes' => [
@@ -75,6 +76,7 @@ or rss json
 ```
 
 **Sorting by date**
+
 Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
 ```php
 $feed = page('blog')->children()->visible()->sortBy(function ($page) {
