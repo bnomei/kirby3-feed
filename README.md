@@ -64,6 +64,7 @@ return [
 ```
 
 **HTML head element**
+
 rss xml
 ```php
 <link rel="alternate" type="application/rss+xml" title="Latest articles" href="<?= site()->url() ?>/feed"/>
