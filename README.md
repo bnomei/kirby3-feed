@@ -14,7 +14,7 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Installation
 
 - for devkit-setup use `composer require bnomei/kirby3-feed` or
-- extract latest release of [kirby3-feed.zip](https://github.com/bnomei/kirby3-feed/releases/download/v1.0.8/kirby3-feed.zip) as folder `site/plugins/kirby3-feed`
+- extract latest release of [kirby3-feed.zip](https://github.com/bnomei/kirby3-feed/releases/download/v1.0.9/kirby3-feed.zip) as folder `site/plugins/kirby3-feed`
 
 > Installation as a gitsubmodule is *not* supported.
 

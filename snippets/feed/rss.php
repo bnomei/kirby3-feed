@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
   <channel>
     <title><?php echo Xml::encode($title) ?></title>
     <link><?php echo Xml::encode($link) ?></link>
-    <lastBuildDate><?php echo \date('r', $modified) ?></lastBuildDate>
+    <lastBuildDate><?php echo $modified ?></lastBuildDate>
     <atom:link href="<?php echo Xml::encode($url) ?>" rel="self" type="application/rss+xml" />
 
     <?php if (!empty($description)): ?>
@@ -18,7 +18,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <title><?php echo Xml::encode($item->title()) ?></title>
       <link><?php echo Xml::encode($item->url()) ?></link>
       <guid><?php echo Xml::encode($item->id()) ?></guid>
-      <pubDate><?php echo $datefield == 'modified' ? $item->modified('r') : $item->{$datefield}()->toDate('r') ?></pubDate>
+      <pubDate><?php echo $datefield == 'modified' ? $item->modified('r', 'date') : $item->{$datefield}()->toDate('r') ?></pubDate>
       <description><![CDATA[<?php echo $item->{$textfield}()->kirbytext() ?>]]></description>
     </item>
     <?php endforeach ?>

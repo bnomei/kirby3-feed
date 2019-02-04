@@ -9,7 +9,7 @@
             'title'          => $item->title()->value(),
             'content_html'   => $item->{$textfield}()->kirbytext()->value(),
             'date_published' => $item->{$datefield}()->toDate('c'),
-            'date_modified'  => $item->modified('Y-m-d\TH:i:sP'),
+            'date_modified'  => $item->modified('Y-m-d\TH:i:sP', 'date'),
         ];
     }
 

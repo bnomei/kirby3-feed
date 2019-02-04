@@ -1,7 +1,7 @@
 {
     "name": "bnomei/kirby3-feed",
     "type": "plugin",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
     "license": "MIT",
     "authors": [
@@ -38,8 +38,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "getkirby/cms": "^3.0.0-RC-2.0"
+        "php": ">=7.1.0"
     },
     "conflict": {
         "getkirby/kirby": "<3.0"

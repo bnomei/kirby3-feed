@@ -87,9 +87,10 @@ class Feed
         $options['link']  = url($options['link']);
 
         if ($options['datefield'] == 'modified') {
-            $options['modified'] = $items->first()->modified();
+            $options['modified'] = $items->first()->modified('r', 'date');
         } else {
-            $options['modified'] = $items->first()->date(null, $options['datefield']);
+            $f = $options['datefield'];
+            $options['modified'] = $items->first()->{$f}()->toDate('r', 'date');
         }
 
         return $options;
