@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
   <channel>
     <title><?php echo Xml::encode($title) ?></title>
     <link><?php echo Xml::encode($link) ?></link>
-    <lastBuildDate><?php echo \date('r', $modified) ?></lastBuildDate>
+    <lastBuildDate><?php echo \date('r', $modified->toDate()) ?></lastBuildDate>
     <atom:link href="<?php echo Xml::encode($url) ?>" rel="self" type="application/rss+xml" />
 
     <?php if (!empty($description)): ?>
