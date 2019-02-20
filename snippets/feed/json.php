@@ -8,7 +8,7 @@
             'url'            => $item->url(),
             'title'          => $item->title()->value(),
             'content_html'   => $item->{$textfield}()->kirbytext()->value(),
-            'date_published' => $item->{$datefield}()->toDate('c'),
+            'date_published' => date('c', $item->{$datefield}()->toTimestamp()),
             'date_modified'  => $item->modified('Y-m-d\TH:i:sP', 'date'),
         ];
     }

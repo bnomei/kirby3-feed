@@ -90,7 +90,7 @@ class Feed
             $options['modified'] = $items->first()->modified('r', 'date');
         } else {
             $f = $options['datefield'];
-            $options['modified'] = $items->first()->{$f}()->toDate('r', 'date');
+            $options['modified'] = date('r', $items->first()->{$f}()->toTimestamp());
         }
 
         return $options;
