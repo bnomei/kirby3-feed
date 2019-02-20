@@ -18,7 +18,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <title><?php echo Xml::encode($item->title()) ?></title>
       <link><?php echo Xml::encode($item->url()) ?></link>
       <guid><?php echo Xml::encode($item->id()) ?></guid>
-      <pubDate><?php echo $datefield == 'modified' ? $item->modified('r', 'date') : $item->{$datefield}()->toDate('r') ?></pubDate>
+      <pubDate><?php echo $datefield == 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>
       <description><![CDATA[<?php echo $item->{$textfield}()->kirbytext() ?>]]></description>
     </item>
     <?php endforeach ?>
