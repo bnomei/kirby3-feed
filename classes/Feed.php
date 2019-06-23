@@ -75,6 +75,7 @@ class Feed
             'title'       => 'Feed',
             'description' => '',
             'link'        => site()->url(),
+            'urlfield'    => 'url',
             'datefield'   => 'date',
             'textfield'   => 'text',
             'modified'    => time(),

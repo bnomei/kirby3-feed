@@ -41,6 +41,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
     'title'       => 'Feed',
     'description' => '',
     'link'        => site()->url(),
+    'urlfield'    => 'url',
     'datefield'   => 'date',
     'textfield'   => 'text',
     'modified'    => time(),
