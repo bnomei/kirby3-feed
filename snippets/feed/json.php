@@ -5,7 +5,7 @@
     foreach ($pages as $item) {
         $items[] = [
             'id'             => $item->url(),
-            'url'            => $item->url(),
+            'url'            => $item->{$urlfield}(),
             'title'          => $item->title()->value(),
             'content_html'   => $item->{$textfield}()->kirbytext()->value(),
             'date_published' => date('c', $item->{$datefield}()->toTimestamp()),

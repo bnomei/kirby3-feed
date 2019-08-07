@@ -26,7 +26,7 @@ Kirby::plugin('bnomei/feed', [
             } elseif ($snippet == 'feed/rss' || \Bnomei\Feed::isXml($string)) {
                 return new Response($string, 'application/rss+xml');
             }
-            return $return;
+            return $string;
         }
     ]
 ]);

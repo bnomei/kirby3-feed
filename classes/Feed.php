@@ -50,7 +50,7 @@ class Feed
         foreach ($pages as $p) {
             $key[] = $p->modified();
         }
-        $key = md5(\implode(',', $key));
+        $key = md5(kirby()->language()->code() . '_' . \implode(',', $key));
         $response = $force ? null : static::cache()->get($key);
         if (!$response) {
             $snippet = \Kirby\Toolkit\A::get($options, 'snippet', 'feed/rss');
@@ -71,6 +71,7 @@ class Feed
             'title'       => 'Feed',
             'description' => '',
             'link'        => site()->url(),
+            'urlfield'    => 'url',
             'datefield'   => 'date',
             'textfield'   => 'text',
             'modified'    => time(),
