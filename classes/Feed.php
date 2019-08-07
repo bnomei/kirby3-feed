@@ -11,10 +11,6 @@ class Feed
         if (!static::$cache) {
             static::$cache = kirby()->cache('bnomei.feed');
         }
-        // create new index table on new version of plugin
-        if (!static::$indexname) {
-            static::$indexname = 'index'.str_replace('.', '', kirby()->plugin('bnomei/feed')->version()[0]);
-        }
         return static::$cache;
     }
 
