@@ -50,7 +50,8 @@ class Feed
         foreach ($pages as $p) {
             $key[] = $p->modified();
         }
-        $key = md5(kirby()->language()->code() . '_' . \implode(',', $key));
+        $l = kirby()->language() ? kirby()->language()->code() : '';
+        $key = md5($l . '_' . \implode(',', $key));
         $response = $force ? null : static::cache()->get($key);
         if (!$response) {
             $snippet = \Kirby\Toolkit\A::get($options, 'snippet', 'feed/rss');
