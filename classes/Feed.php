@@ -69,6 +69,7 @@ class Feed
     {
         $defaults = array(
             'url'         => site()->url(),
+            'feedurl'     => site()->url() . '/feed/',
             'title'       => 'Feed',
             'description' => '',
             'link'        => site()->url(),

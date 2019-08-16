@@ -1,6 +1,7 @@
 # OS files
 .DS_Store
 .php_cs.cache
+.idea
 
 # files of Composer dependencies that are not needed for the plugin
 /vendor/**/.*

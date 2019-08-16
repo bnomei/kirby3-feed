@@ -38,6 +38,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 ```php
 [
     'url'         => site()->url(),
+    'feedurl'     => site()->url() . '/feed/',
     'title'       => 'Feed',
     'description' => '',
     'link'        => site()->url(),
