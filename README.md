@@ -1,6 +1,6 @@
 # Kirby 3 Feed
 
-![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-feed.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg) ![Kirby 3 Pluginkit](https://img.shields.io/badge/Pluginkit-YES-cca000.svg)
+![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-feed.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3-black.svg) ![Kirby 3 Pluginkit](https://img.shields.io/badge/Pluginkit-YES-cca000.svg) [![Build Status](https://travis-ci.com/bnomei/kirby3-feed.svg?branch=master)](https://travis-ci.com/bnomei/kirby3-feed) [![Coverage Status](https://coveralls.io/repos/github/bnomei/kirby3-feed/badge.svg?branch=master)](https://coveralls.io/github/bnomei/kirby3-feed?branch=master) [![Gitter](https://badges.gitter.im/bnomei-kirby-3-plugins/community.svg)](https://gitter.im/bnomei-kirby-3-plugins/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Generate a RSS/JSON-Feed from a Pages-Collection.
 
@@ -37,16 +37,18 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 
 ```php
 [
-    'url'         => site()->url(),
-    'feedurl'     => site()->url() . '/feed/',
-    'title'       => 'Feed',
+    'url' => site()->url(),
+    'feedurl' => site()->url() . '/feed/',
+    'title' => 'Feed',
     'description' => '',
-    'link'        => site()->url(),
-    'urlfield'    => 'url',
-    'datefield'   => 'date',
-    'textfield'   => 'text',
-    'modified'    => time(),
-    'snippet'     => 'feed/rss', // or 'feed/json
+    'link' => site()->url(),
+    'urlfield' => 'url',
+    'datefield' => 'date',
+    'textfield' => 'text',
+    'modified' => time(),
+    'snippet' => 'feed/rss', // 'feed/json'
+    'mime' => null,
+    'sort' => true,
 ]
 ```
 
@@ -83,7 +85,16 @@ or rss json
 <link rel="alternate" type="application/json" title="Latest articles" href="<?= site()->url() ?>/feed"/>
 ```
 
-**Sorting by date**
+> TIP: Having multiple feed links is still valid html. So you can have both rss and json if you want and setup the routes properly.
+
+**Sorting**
+
+The Plugin applies a default sorting for the pages by date/modified in descending order (newest first). 
+
+- If you do not want this you have to set the `datefield` setting to another Field name or PageMethod name.
+- If you want to disable sorting by the plugin and add your own you can set the option `sort` to `false`.
+
+**Pitfalls when presorting by date and limit**
 
 Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
 ```php

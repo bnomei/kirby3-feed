@@ -1,97 +1,198 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bnomei;
 
-class Feed
+final class Feed
 {
-    private static $indexname = null;
-    private static $cache = null;
-    private static function cache(): \Kirby\Cache\Cache
+    /**
+     * @var array
+     */
+    private $options;
+
+    /*
+     * @var string
+     */
+    private $string;
+
+    public function __construct(?\Kirby\Cms\Pages $pages = null, array $options = [])
     {
-        if (!static::$cache) {
-            static::$cache = kirby()->cache('bnomei.feed');
+        $this->options = $this->optionsFromDefault($pages, $options);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return string
+     */
+    public function getString(): string
+    {
+        return $this->string;
+    }
+
+    /**
+     * @param null $force
+     * @return Feed
+     * @throws \Kirby\Exception\InvalidArgumentException
+     */
+    public function stringFromSnippet($force = null): Feed
+    {
+        $force = $force ? $force : (option('debug') && option('bnomei.feed.debugforce'));
+        $key = $this->modifiedHashFromKeys();
+
+        $string = null;
+        if (! $force) {
+            $string = kirby()->cache('bnomei.feed')->get($key);
         }
-        return static::$cache;
+        if ($string) {
+            $this->string = $string;
+            return $this;
+        }
+
+        $string = snippet(
+            \Kirby\Toolkit\A::get($this->options, 'snippet'),
+            $this->options,
+            true
+        );
+
+        kirby()->cache('bnomei.feed')->set(
+            $key,
+            $string,
+            intval(option('bnomei.feed.expires'))
+        );
+
+        $this->string = $string;
+        return $this;
     }
 
-    public static function flush()
+    /**
+     * @return string
+     * @throws \Kirby\Exception\DuplicateException
+     */
+    private function modifiedHashFromKeys(): string
     {
-        return static::cache()->flush();
+        $keys = [
+            kirby()->language() ? kirby()->language()->code() : '',
+            str_replace('.', '', kirby()->plugin('bnomei/feed')->version()[0]),
+            \Kirby\Toolkit\A::get($this->options, 'snippet'),
+        ];
+        $pages = \Kirby\Toolkit\A::get($this->options, 'items');
+        foreach ($pages as $page) {
+            $keys[] = $page->modified();
+        }
+        return sha1(implode(',', $keys));
     }
 
-    public static function isJson($string)
+    /**
+     * @param \Kirby\Cms\Pages|null $pages
+     * @param array $options
+     * @return array
+     */
+    public function optionsFromDefault(?\Kirby\Cms\Pages $pages = null, $options = []): array
+    {
+        $defaults = [
+            'url' => site()->url(),
+            'feedurl' => site()->url() . '/feed/',
+            'title' => 'Feed',
+            'description' => '',
+            'link' => site()->url(),
+            'urlfield' => 'url',
+            'datefield' => 'date',
+            'textfield' => 'text',
+            'modified' => time(),
+            'snippet' => 'feed/rss',
+            'mime' => null,
+            'sort' => true,
+        ];
+        $options = array_merge($defaults, $options);
+
+        $items = $pages ?? null;
+        if ($items && $options['sort'] === true) {
+            $items = $items->sortBy($options['datefield'], 'desc');
+        }
+        $options['items'] = $items;
+        $options['link'] = url($options['link']);
+
+        if ($items && $options['datefield'] === 'modified') {
+            $options['modified'] = $items->first()->modified('r', 'date');
+        } elseif ($items) {
+            $datefieldName = $options['datefield'];
+            $options['modified'] = date('r', $items->first()->{$datefieldName}()->toTimestamp());
+        } else {
+            $options['modified'] = site()->homePage()->modified();
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return \Kirby\Http\Response
+     */
+    public function response(): \Kirby\Http\Response
+    {
+        $mime = \Kirby\Toolkit\A::get($this->options, 'mime');
+        $snippet = \Kirby\Toolkit\A::get($this->options, 'snippet');
+
+        if ($mime && in_array($mime, array_values(\Kirby\Toolkit\Mime::types()))) {
+            return new \Kirby\Http\Response($this->string, $mime);
+        } elseif ($snippet === 'feed/json' || \Bnomei\Feed::isJson($this->string)) {
+            return new \Kirby\Http\Response($this->string, 'application/json');
+        } elseif ($snippet === 'feed/rss' || \Bnomei\Feed::isXml($this->string)) {
+            return new \Kirby\Http\Response($this->string, 'application/rss+xml');
+        }
+        return new \Kirby\Http\Response('Error: Feed Response', null, 500);
+    }
+
+    /**
+     * @param \Kirby\Cms\Pages $pages
+     * @param array $options
+     * @param null $force
+     * @return \Kirby\Http\Response
+     * @throws \Kirby\Exception\InvalidArgumentException
+     */
+    public static function feed(\Kirby\Cms\Pages $pages, array $options = [], $force = null): \Kirby\Http\Response
+    {
+        $feed = new self($pages, $options);
+        return $feed->stringFromSnippet($force)->response();
+    }
+
+    /**
+     * @param $string
+     * @return bool
+     */
+    public static function isJson($string): bool
     {
         json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
+        $lastError = json_last_error();
+        return $lastError === JSON_ERROR_NONE;
     }
 
-    public static function isXml($content)
+    /**
+     * @param $content
+     * @return bool
+     */
+    public static function isXml($content): bool
     {
-        $content = trim($content);
-        if (empty($content)) {
+        if (! $content) {
+            return false;
+        }
+        if (is_string($content) && strlen(trim($content)) === 0) {
             return false;
         }
         if (stripos($content, '<!DOCTYPE html>') !== false) {
             return false;
         }
         libxml_use_internal_errors(true);
-        simplexml_load_string($content);
+        simplexml_load_string(trim($content));
         $errors = libxml_get_errors();
         libxml_clear_errors();
-        return empty($errors);
-    }
-
-    public static function feed($pages, $options = [], $force = null)
-    {
-        if ($force == null && option('debug') && option('bnomei.feed.debugforce')) {
-            $force = true;
-        }
-        $key = [];
-        foreach ($pages as $p) {
-            $key[] = $p->modified();
-        }
-        $l = kirby()->language() ? kirby()->language()->code() : '';
-        $key = md5($l . '_' . \implode(',', $key));
-        $response = $force ? null : static::cache()->get($key);
-        if (!$response) {
-            $snippet = \Kirby\Toolkit\A::get($options, 'snippet', 'feed/rss');
-            $response = snippet($snippet, static::data($pages, $options), true);
-            static::cache()->set(
-                $key,
-                $response,
-                option('bnomei.feed.expires')
-            );
-        }
-        return $response;
-    }
-
-    public static function data($pages, $options = [])
-    {
-        $defaults = array(
-            'url'         => site()->url(),
-            'feedurl'     => site()->url() . '/feed/',
-            'title'       => 'Feed',
-            'description' => '',
-            'link'        => site()->url(),
-            'urlfield'    => 'url',
-            'datefield'   => 'date',
-            'textfield'   => 'text',
-            'modified'    => time(),
-        );
-        $options = array_merge($defaults, $options);
-
-        $items = $pages->sortBy($options['datefield'], 'desc');
-        $options['items'] = $items;
-
-        $options['link']  = url($options['link']);
-
-        if ($options['datefield'] == 'modified') {
-            $options['modified'] = $items->first()->modified('r', 'date');
-        } else {
-            $f = $options['datefield'];
-            $options['modified'] = date('r', $items->first()->{$f}()->toTimestamp());
-        }
-
-        return $options;
+        return count($errors) === 0;
     }
 }

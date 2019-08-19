@@ -12,11 +12,13 @@
     }
 
     $feed = [
-        'version'       => 'https://jsonfeed.org/version/1',
+        'version'       => 'YAML',
         'title'         => $title,
         'description'   => $description,
         'home_page_url' => $url,
         'feed_url'      => $feedurl,
         'items'         => $entries,
     ];
-    echo json_encode($feed);
+
+
+    echo Kirby\Data\Yaml::encode($feed);

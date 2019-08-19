@@ -1,35 +1,57 @@
 {
-    "name": "bnomei/kirby3-feed",
-    "type": "kirby-plugin",
-    "version": "1.2.0",
-    "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Bruno Meilick",
-            "email": "b@bnomei.com"
-        }
-    ],
-    "keywords": [
-        "kirby3",
-        "kirby3-cms",
-        "kirby3-plugin",
-        "rss-feed",
-        "rss",
-        "feed",
-        "json"
-    ],
-    "autoload": {
-        "psr-4": {
-            "Bnomei\\": "classes/"
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
-    "require": {
-        "php": ">=7.1.0",
-        "getkirby/composer-installer": "^1.1"
+  "name": "bnomei/kirby3-feed",
+  "type": "kirby-plugin",
+  "version": "1.3.0",
+  "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bruno Meilick",
+      "email": "b@bnomei.com"
     }
+  ],
+  "keywords": [
+    "kirby3",
+    "kirby3-cms",
+    "kirby3-plugin",
+    "rss-feed",
+    "rss",
+    "feed",
+    "json"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bnomei\\": "classes/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.2.0",
+    "getkirby/composer-installer": "^1.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.3",
+    "getkirby/cms": "^3.2",
+    "php-coveralls/php-coveralls": "^2.1",
+    "nunomaduro/phpinsights": "^1.8"
+  },
+  "scripts": {
+    "analyze": "phpstan analyse classes",
+    "insights": "./vendor/bin/phpinsights -v",
+    "fix": "php-cs-fixer fix",
+    "test": [
+      "mkdir -p tests/logs",
+      "phpunit --configuration ./phpunit.xml"
+    ],
+    "dist": [
+      "composer run-script fix",
+      "composer install --no-dev --optimize-autoloader"
+    ]
+  },
+  "extra": {
+    "kirby-cms-path": "tests/kirby"
+  }
 }
