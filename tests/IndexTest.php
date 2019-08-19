@@ -36,8 +36,5 @@ class IndexTest extends TestCase
         $response = kirby()->render('/feed-yaml');
         $this->assertIsInt($response->code(), 200);
         $this->assertTrue('text/html' === $response->type());
-
-        // TODO: kirby render sends text/html and not type set by plugin
-        $this->assertFalse('text/plain' === $response->type());
     }
 }

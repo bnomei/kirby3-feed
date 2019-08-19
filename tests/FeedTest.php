@@ -97,7 +97,7 @@ class FeedTest extends TestCase
             [
                 'feedurl' => '/feed-yaml',
                 'snippet' => 'feed/yaml',
-                'mime' => 'text/plain', // TODO: application/yaml is missing in kirby
+                'mime' => 'text/html',
             ]
         );
         $yamlString = $feed->stringFromSnippet(true)->getString();
@@ -108,7 +108,7 @@ class FeedTest extends TestCase
         $this->assertCount(11, $yaml['items']);
 
         $response = $feed->response();
-        $this->assertTrue($response->type() === 'text/plain');
+        $this->assertTrue($response->type() === 'text/html');
     }
 
     public function testInvalidOptions()

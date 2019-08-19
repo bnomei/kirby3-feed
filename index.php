@@ -14,7 +14,9 @@ Kirby::plugin('bnomei/feed', [
     ],
     'pagesMethods' => [ // PAGES not PAGE
         'feed' => function ($options = [], $force = null) {
-            return \Bnomei\Feed::feed($this, $options, $force);
+            $response = \Bnomei\Feed::feed($this, $options, $force);
+            kirby()->response()->type($response->type());
+            return $response;
         },
     ],
 ]);

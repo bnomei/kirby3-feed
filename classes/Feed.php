@@ -140,12 +140,14 @@ final class Feed
         $mime = \Kirby\Toolkit\A::get($this->options, 'mime');
         $snippet = \Kirby\Toolkit\A::get($this->options, 'snippet');
 
-        if ($mime && in_array($mime, array_values(\Kirby\Toolkit\Mime::types()))) {
+        $allMimeTypes = \Kirby\Toolkit\Mime::types();
+        $mime = array_search($mime, $allMimeTypes);
+        if ($mime !== false) {
             return new \Kirby\Http\Response($this->string, $mime);
         } elseif ($snippet === 'feed/json' || \Bnomei\Feed::isJson($this->string)) {
-            return new \Kirby\Http\Response($this->string, 'application/json');
+            return new \Kirby\Http\Response($this->string, 'json');
         } elseif ($snippet === 'feed/rss' || \Bnomei\Feed::isXml($this->string)) {
-            return new \Kirby\Http\Response($this->string, 'application/rss+xml');
+            return new \Kirby\Http\Response($this->string, 'rss');
         }
         return new \Kirby\Http\Response('Error: Feed Response', null, 500);
     }
