@@ -56,11 +56,11 @@ final class Feed
             return $this;
         }
 
-        $string = snippet(
+        $string = trim(snippet(
             \Kirby\Toolkit\A::get($this->options, 'snippet'),
             $this->options,
             true
-        );
+        ));
 
         kirby()->cache('bnomei.feed')->set(
             $key,
