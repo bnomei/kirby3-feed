@@ -47,8 +47,8 @@
       "phpunit --configuration ./phpunit.xml"
     ],
     "dist": [
-      "composer run-script fix",
-      "composer install --no-dev --optimize-autoloader"
+      "composer install --no-dev --optimize-autoloader",
+      "git rm -rf --cached .; git add .;"
     ]
   },
   "extra": {
