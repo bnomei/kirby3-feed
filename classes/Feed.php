@@ -22,17 +22,21 @@ final class Feed
     }
 
     /**
+     * @param string|null $key
      * @return array
      */
-    public function getOptions(): array
+    public function option(?string $key = null)
     {
+        if ($key) {
+            return \Kirby\Toolkit\A::get($this->options, $key);
+        }
         return $this->options;
     }
 
     /**
      * @return string
      */
-    public function getString(): string
+    public function __toString(): string
     {
         return $this->string;
     }

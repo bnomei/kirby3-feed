@@ -21,25 +21,29 @@ class FeedTest extends TestCase
     public function testPagesAndXML()
     {
         $feed = new Bnomei\Feed(page('blog')->children());
-        $options = $feed->getOptions();
+        $options = $feed->option();
         $this->assertIsArray($options);
         $this->assertCount(11, $options['items']);
         $this->assertTrue($options['datefield'] === 'date');
+
+        $this->assertIsArray($feed->option());
+        $this->assertEquals('http://homestead.test/', $feed->option('site.url'));
+        $this->assertNull($feed->option('does not exist'));
 
         // test sorting works
         $this->assertTrue($options['items']->first()->title()->value() === 'Aardvark');
 
         // create cache since setup flushed it
-        $xmlString = $feed->stringFromSnippet()->getString();
+        $xmlString = (string) $feed->stringFromSnippet();
         $this->assertTrue(Bnomei\Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
 
         // read from cache
-        $xmlString = $feed->stringFromSnippet()->getString();
+        $xmlString = (string) $feed->stringFromSnippet();
         $this->assertTrue(Bnomei\Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
 
-        $xmlString = $feed->stringFromSnippet(true)->getString();
+        $xmlString = (string) $feed->stringFromSnippet(true);
         $this->assertTrue(Bnomei\Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
     }
@@ -53,13 +57,13 @@ class FeedTest extends TestCase
                 'sort' => true,
             ]
         );
-        $options = $feed->getOptions();
+        $options = $feed->option();
         $this->assertIsArray($options);
         $this->assertTrue($options['snippet'] === 'feed/json');
         $this->assertCount(5, $options['items']);
         $this->assertTrue($options['items']->first()->title()->value() === 'Gar');
 
-        $jsonString = $feed->stringFromSnippet(true)->getString();
+        $jsonString = (string) $feed->stringFromSnippet(true);
         $this->assertTrue(Bnomei\Feed::isJson($jsonString));
         $this->assertStringStartsWith('{"version":"https:\/\/jsonfeed.org\/version\/1","title":"Feed",', $jsonString);
     }
@@ -72,7 +76,7 @@ class FeedTest extends TestCase
                 'sort' => false,
             ]
         );
-        $options = $feed->getOptions();
+        $options = $feed->option();
         $this->assertCount(5, $options['items']);
         $this->assertTrue($options['items']->first()->title()->value() === 'Kiwi');
     }
@@ -85,7 +89,7 @@ class FeedTest extends TestCase
                 'datefield' => 'modified',
             ]
         );
-        $options = $feed->getOptions();
+        $options = $feed->option();
         $this->assertIsArray($options);
         $this->assertTrue($options['datefield'] === 'modified');
     }
@@ -100,7 +104,7 @@ class FeedTest extends TestCase
                 'mime' => 'text/html',
             ]
         );
-        $yamlString = $feed->stringFromSnippet(true)->getString();
+        $yamlString = (string) $feed->stringFromSnippet(true);
         $yaml = Kirby\Data\Yaml::decode($yamlString);
         $this->assertCount(6, $yaml);
         $this->assertArrayHasKey('title', $yaml);
