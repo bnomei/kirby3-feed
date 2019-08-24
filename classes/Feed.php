@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Bnomei;
 
+use Kirby\Cms\Pages;
+use Kirby\Exception\DuplicateException;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Http\Response;
+use Kirby\Toolkit\A;
+use Kirby\Toolkit\Mime;
+
 final class Feed
 {
     /**
@@ -16,7 +23,7 @@ final class Feed
      */
     private $string;
 
-    public function __construct(?\Kirby\Cms\Pages $pages = null, array $options = [])
+    public function __construct(?Pages $pages = null, array $options = [])
     {
         $this->options = $this->optionsFromDefault($pages, $options);
     }
@@ -28,7 +35,7 @@ final class Feed
     public function option(?string $key = null)
     {
         if ($key) {
-            return \Kirby\Toolkit\A::get($this->options, $key);
+            return A::get($this->options, $key);
         }
         return $this->options;
     }
@@ -44,7 +51,7 @@ final class Feed
     /**
      * @param null $force
      * @return Feed
-     * @throws \Kirby\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function stringFromSnippet($force = null): Feed
     {
@@ -61,7 +68,7 @@ final class Feed
         }
 
         $string = trim(snippet(
-            \Kirby\Toolkit\A::get($this->options, 'snippet'),
+            A::get($this->options, 'snippet'),
             $this->options,
             true
         ));
@@ -78,16 +85,16 @@ final class Feed
 
     /**
      * @return string
-     * @throws \Kirby\Exception\DuplicateException
+     * @throws DuplicateException
      */
     private function modifiedHashFromKeys(): string
     {
         $keys = [
             kirby()->language() ? kirby()->language()->code() : '',
             str_replace('.', '', kirby()->plugin('bnomei/feed')->version()[0]),
-            \Kirby\Toolkit\A::get($this->options, 'snippet'),
+            A::get($this->options, 'snippet'),
         ];
-        $pages = \Kirby\Toolkit\A::get($this->options, 'items');
+        $pages = A::get($this->options, 'items');
         foreach ($pages as $page) {
             $keys[] = $page->modified();
         }
@@ -95,11 +102,11 @@ final class Feed
     }
 
     /**
-     * @param \Kirby\Cms\Pages|null $pages
+     * @param Pages|null $pages
      * @param array $options
      * @return array
      */
-    public function optionsFromDefault(?\Kirby\Cms\Pages $pages = null, $options = []): array
+    public function optionsFromDefault(?Pages $pages = null, $options = []): array
     {
         $defaults = [
             'url' => site()->url(),
@@ -137,33 +144,33 @@ final class Feed
     }
 
     /**
-     * @return \Kirby\Http\Response
+     * @return Response
      */
-    public function response(): \Kirby\Http\Response
+    public function response(): Response
     {
-        $mime = \Kirby\Toolkit\A::get($this->options, 'mime');
-        $snippet = \Kirby\Toolkit\A::get($this->options, 'snippet');
+        $mime = A::get($this->options, 'mime');
+        $snippet = A::get($this->options, 'snippet');
 
-        $allMimeTypes = \Kirby\Toolkit\Mime::types();
+        $allMimeTypes = Mime::types();
         $mime = array_search($mime, $allMimeTypes);
         if ($mime !== false) {
-            return new \Kirby\Http\Response($this->string, $mime);
-        } elseif ($snippet === 'feed/json' || \Bnomei\Feed::isJson($this->string)) {
-            return new \Kirby\Http\Response($this->string, 'json');
-        } elseif ($snippet === 'feed/rss' || \Bnomei\Feed::isXml($this->string)) {
-            return new \Kirby\Http\Response($this->string, 'rss');
+            return new Response($this->string, $mime);
+        } elseif ($snippet === 'feed/json' || Feed::isJson($this->string)) {
+            return new Response($this->string, 'json');
+        } elseif ($snippet === 'feed/rss' || Feed::isXml($this->string)) {
+            return new Response($this->string, 'rss');
         }
-        return new \Kirby\Http\Response('Error: Feed Response', null, 500);
+        return new Response('Error: Feed Response', null, 500);
     }
 
     /**
-     * @param \Kirby\Cms\Pages $pages
+     * @param Pages $pages
      * @param array $options
      * @param null $force
-     * @return \Kirby\Http\Response
-     * @throws \Kirby\Exception\InvalidArgumentException
+     * @return Response
+     * @throws InvalidArgumentException
      */
-    public static function feed(\Kirby\Cms\Pages $pages, array $options = [], $force = null): \Kirby\Http\Response
+    public static function feed(Pages $pages, array $options = [], $force = null): Response
     {
         $feed = new self($pages, $options);
         return $feed->stringFromSnippet($force)->response();

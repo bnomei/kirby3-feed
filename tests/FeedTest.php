@@ -14,13 +14,13 @@ class FeedTest extends TestCase
 
     public function testConstruct()
     {
-        $feed = new Bnomei\Feed(null);
-        $this->assertInstanceOf(Bnomei\Feed::class, $feed);
+        $feed = new Feed(null);
+        $this->assertInstanceOf(Feed::class, $feed);
     }
 
     public function testPagesAndXML()
     {
-        $feed = new Bnomei\Feed(page('blog')->children());
+        $feed = new Feed(page('blog')->children());
         $options = $feed->option();
         $this->assertIsArray($options);
         $this->assertCount(11, $options['items']);
@@ -35,22 +35,22 @@ class FeedTest extends TestCase
 
         // create cache since setup flushed it
         $xmlString = (string) $feed->stringFromSnippet();
-        $this->assertTrue(Bnomei\Feed::isXml($xmlString));
+        $this->assertTrue(Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
 
         // read from cache
         $xmlString = (string) $feed->stringFromSnippet();
-        $this->assertTrue(Bnomei\Feed::isXml($xmlString));
+        $this->assertTrue(Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
 
         $xmlString = (string) $feed->stringFromSnippet(true);
-        $this->assertTrue(Bnomei\Feed::isXml($xmlString));
+        $this->assertTrue(Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
     }
 
     public function testPagesAndJSON()
     {
-        $feed = new Bnomei\Feed(
+        $feed = new Feed(
             page('blog')->children()->flip()->limit(5),
             [
                 'snippet' => 'feed/json',
@@ -64,13 +64,13 @@ class FeedTest extends TestCase
         $this->assertTrue($options['items']->first()->title()->value() === 'Gar');
 
         $jsonString = (string) $feed->stringFromSnippet(true);
-        $this->assertTrue(Bnomei\Feed::isJson($jsonString));
+        $this->assertTrue(Feed::isJson($jsonString));
         $this->assertStringStartsWith('{"version":"https:\/\/jsonfeed.org\/version\/1","title":"Feed",', $jsonString);
     }
 
     public function testNoSorting()
     {
-        $feed = new Bnomei\Feed(
+        $feed = new Feed(
             page('blog')->children()->flip()->limit(5),
             [
                 'sort' => false,
@@ -83,7 +83,7 @@ class FeedTest extends TestCase
 
     public function testModified()
     {
-        $feed = new Bnomei\Feed(
+        $feed = new Feed(
             page('blog')->children(),
             [
                 'datefield' => 'modified',
@@ -96,7 +96,7 @@ class FeedTest extends TestCase
 
     public function testForcedMime()
     {
-        $feed = new Bnomei\Feed(
+        $feed = new Feed(
             page('blog')->children(),
             [
                 'feedurl' => '/feed-yaml',
@@ -117,7 +117,7 @@ class FeedTest extends TestCase
 
     public function testInvalidOptions()
     {
-        $feed = new Bnomei\Feed(
+        $feed = new Feed(
             page('blog')->children(),
             [
                 'feedurl' => '/feed-invalid',
@@ -134,9 +134,9 @@ class FeedTest extends TestCase
 
     public function testStaticXMLHelper()
     {
-        $this->assertFalse(Bnomei\Feed::isXml(null));
-        $this->assertFalse(Bnomei\Feed::isXml(''));
-        $this->assertFalse(Bnomei\Feed::isXml(' '));
-        $this->assertFalse(Bnomei\Feed::isXml('<!DOCTYPE html><body></body>'));
+        $this->assertFalse(Feed::isXml(null));
+        $this->assertFalse(Feed::isXml(''));
+        $this->assertFalse(Feed::isXml(' '));
+        $this->assertFalse(Feed::isXml('<!DOCTYPE html><body></body>'));
     }
 }
