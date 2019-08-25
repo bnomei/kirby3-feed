@@ -53,5 +53,11 @@
   },
   "extra": {
     "kirby-cms-path": "tests/kirby"
+  },
+  "suggest": {
+    "bnomei/kirby3-htmlhead": "Best-practice HTML Head Element extendable with snippets.",
+    "bnomei/kirby3-security-headers": "CPS headers to make the the web a saver place. Sensible defaults with zero configuration.",
+    "bnomei/kirby3-robots-txt": "Automatic robots.txt. Detects xmlsitemap.",
+    "omz13/kirby3-xmlsitemap": "Adds a xml sitemap"
   }
 }
