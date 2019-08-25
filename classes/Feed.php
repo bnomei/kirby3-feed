@@ -26,6 +26,10 @@ final class Feed
     public function __construct(?Pages $pages = null, array $options = [])
     {
         $this->options = $this->optionsFromDefault($pages, $options);
+
+        if (option('debug')) {
+            kirby()->cache('bnomei.feed')->flush();
+        }
     }
 
     /**
@@ -55,7 +59,7 @@ final class Feed
      */
     public function stringFromSnippet($force = null): Feed
     {
-        $force = $force ? $force : (option('debug') && option('bnomei.feed.debugforce'));
+        $force = $force ?? option('debug');
         $key = $this->modifiedHashFromKeys();
 
         $string = null;
@@ -73,11 +77,13 @@ final class Feed
             true
         ));
 
-        kirby()->cache('bnomei.feed')->set(
-            $key,
-            $string,
-            intval(option('bnomei.feed.expires'))
-        );
+        if (! option('debug')) {
+            kirby()->cache('bnomei.feed')->set(
+                $key,
+                $string,
+                intval(option('bnomei.feed.expires'))
+            );
+        }
 
         $this->string = $string;
         return $this;
@@ -98,7 +104,7 @@ final class Feed
         foreach ($pages as $page) {
             $keys[] = $page->modified();
         }
-        return sha1(implode(',', $keys));
+        return strval(crc32(implode(',', $keys)));
     }
 
     /**
@@ -125,7 +131,7 @@ final class Feed
         $options = array_merge($defaults, $options);
 
         foreach ($options as $key => $call) {
-            if (is_callable($call)) {
+            if (is_callable($call) && !in_array($call, ['date' , 'time' , 'sort'])) {
                 $options[$key] = $call();
             }
         }

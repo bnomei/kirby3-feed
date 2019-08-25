@@ -1,23 +1,24 @@
 <?php
+    // NOTE: unless values are explicit cast yaml ties to resolve kirbys recursive tree
     $entries = [];
     foreach ($items as $item) {
         $entries[] = [
-            'id'             => $item->url(),
-            'url'            => $item->{$urlfield}(),
-            'title'          => $item->title()->value(),
-            'content_html'   => $item->{$textfield}()->kirbytext()->value(),
-            'date_published' => date('c', $item->{$datefield}()->toTimestamp()),
-            'date_modified'  => $item->modified('Y-m-d\TH:i:sP', 'date'),
+            'id'             => (string) $item->url(),
+            'url'            => (string) $item->{$urlfield}(),
+            'title'          => (string) $item->title()->value(),
+            'content_html'   => (string) $item->{$textfield}()->kirbytext()->value(),
+            'date_published' => (string) date('c', $item->{$datefield}()->toTimestamp()),
+            'date_modified'  => (string) $item->modified('Y-m-d\TH:i:sP', 'date'),
         ];
     }
 
     $feed = [
         'version'       => 'YAML',
-        'title'         => $title,
-        'description'   => $description,
-        'home_page_url' => $url,
-        'feed_url'      => $feedurl,
-        'items'         => $entries,
+        'title'         => (string) $title,
+        'description'   => (string) $description,
+        'home_page_url' => (string) $url,
+        'feed_url'      => (string) $feedurl,
+        'items'         => (array) $entries,
     ];
 
 

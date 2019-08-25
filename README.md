@@ -88,7 +88,7 @@ rss xml
 ```php
 <link rel="alternate" type="application/rss+xml" title="Latest articles" href="<?= site()->url() ?>/feed"/>
 ```
-or rss json
+and/or rss json
 ```php
 <link rel="alternate" type="application/json" title="Latest articles" href="<?= site()->url() ?>/feed"/>
 ```
@@ -113,18 +113,16 @@ $feed = page('blog')->children()->visible()->sortBy(function ($page) {
 
 ## Settings
 
-**mime**
-- default: `null` to autodetect json or rss-xml otherwise enforce output with a certain [mime type](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php)
+| bnomei.feed.              | Default        | Description               |            
+|---------------------------|----------------|---------------------------|
+| mime | `null` | to autodetect json or rss-xml otherwise enforce output with a certain [mime type](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php) |
+| expires |`60*24*7` | in minutes |
 
-**expires**
-- default: `60*24*7` in minutes
+> The plugin will automatically devalidate the cache if any of the Page-Objects were modified.
 
-> The plugin will automatically devalidate the cache if any of the Page-Objects were modified. The plugin uses minutes not seconds since K3 Cache does that as well.
+## Cache
 
-**debugforce**
-- default: `true`
-force refresh if Kirbys global debug options is active
-
+If the **global** debug option is set to `true` the plugin will automatically flush its own cache and not write to the cache.
 
 ## Disclaimer
 

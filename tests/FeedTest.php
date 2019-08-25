@@ -27,7 +27,7 @@ class FeedTest extends TestCase
         $this->assertTrue($options['datefield'] === 'date');
 
         $this->assertIsArray($feed->option());
-        $this->assertEquals('http://homestead.test/', $feed->option('site.url'));
+        $this->assertEquals(kirby()->site()->url(), $feed->option('url'));
         $this->assertNull($feed->option('does not exist'));
 
         // test sorting works
