@@ -123,6 +123,7 @@ class FeedTest extends TestCase
                 'feedurl' => '/feed-invalid',
                 'snippet' => 'feed/invalid',
                 'mime' => 'invalid',
+                'callable' => function() { return false; },
             ]
         );
 
