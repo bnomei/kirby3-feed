@@ -22,6 +22,7 @@ class IndexTest extends TestCase
         $response = kirby()->render('/feed');
         $this->assertTrue($response->code() === 200);
         $this->assertTrue('application/rss+xml' === $response->type());
+        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $response->body());
     }
 
     public function testFindsFeedRouteJSON()
