@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'debug' => true,
     'routes' => [
         [
             'pattern' => 'feed',
