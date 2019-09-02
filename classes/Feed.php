@@ -129,13 +129,7 @@ final class Feed
             'sort' => true,
         ];
         $options = array_merge($defaults, $options);
-
-        foreach ($options as $key => $call) {
-            if (is_callable($call) && !in_array($call, ['date' , 'time' , 'sort'])) {
-                $options[$key] = $call();
-            }
-        }
-
+        
         $items = $pages ?? null;
         if ($items && $options['sort'] === true) {
             $items = $items->sortBy($options['datefield'], 'desc');
