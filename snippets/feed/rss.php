@@ -11,7 +11,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
     <?php endif; ?>
     <?php foreach ($items as $item): ?>
     <item>
-      <title><?= \Kirby\Toolkit\Xml::encode($item->title()) ?></title>
+      <title><?= \Kirby\Toolkit\Xml::encode($item->{$titlefield}()) ?></title>
       <link><?= \Kirby\Toolkit\Xml::encode($item->{$urlfield}()) ?></link>
       <guid><?= \Kirby\Toolkit\Xml::encode($item->url()) ?></guid>
       <pubDate><?= $datefield === 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>

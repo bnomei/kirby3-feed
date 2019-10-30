@@ -52,6 +52,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
     'description' => '',
     'link' => site()->url(),
     'urlfield' => 'url',
+    'titlefield' => 'title',
     'datefield' => 'date',
     'textfield' => 'text',
     'modified' => time(),
