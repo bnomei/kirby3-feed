@@ -12,7 +12,7 @@ return [
                     'description' => 'Read the latest news about our company',
                     'link' => 'blog',
                 ];
-                $feed = page('blog')->children()->visible()->flip()->limit(10)->feed($options);
+                $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
                 return $feed;
             },
         ],
@@ -27,7 +27,7 @@ return [
                     'feedurl' => '/feed-json',
                     'snippet' => 'feed/json'
                 ];
-                $feed = page('blog')->children()->visible()->flip()->limit(10)->feed($options);
+                $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
                 return $feed;
             },
         ],
@@ -41,9 +41,9 @@ return [
                     'link' => 'blog',
                     'feedurl' => '/feed-yaml',
                     'snippet' => 'feed/yaml',
-                    'mime' => 'application/yaml'
+                    'mime' => 'yaml'
                 ];
-                $feed = page('blog')->children()->visible()->flip()->limit(10)->feed($options);
+                $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
                 return $feed;
             },
         ],
