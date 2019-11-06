@@ -121,6 +121,7 @@ final class Feed
             'description' => '',
             'link' => site()->url(),
             'urlfield' => 'url',
+            'titlefield' => 'title',
             'datefield' => 'date',
             'textfield' => 'text',
             'modified' => time(),

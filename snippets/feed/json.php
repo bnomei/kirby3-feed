@@ -4,7 +4,7 @@
         $entries[] = [
             'id'             => $item->url(),
             'url'            => $item->{$urlfield}(),
-            'title'          => $item->title()->value(),
+            'title'          => $item->{$titlefield}()->value(),
             'content_html'   => $item->{$textfield}()->kirbytext()->value(),
             'date_published' => date('c', $item->{$datefield}()->toTimestamp()),
             'date_modified'  => $item->modified('Y-m-d\TH:i:sP', 'date'),
