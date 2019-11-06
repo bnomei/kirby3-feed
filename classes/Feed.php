@@ -130,7 +130,7 @@ final class Feed
             'sort' => true,
         ];
         $options = array_merge($defaults, $options);
-        
+
         $items = $pages ?? null;
         if ($items && $options['sort'] === true) {
             $items = $items->sortBy($options['datefield'], 'desc');
@@ -155,12 +155,10 @@ final class Feed
      */
     public function response(): Response
     {
-        $mime = A::get($this->options, 'mime');
         $snippet = A::get($this->options, 'snippet');
+        $mime = Mime::fromExtension(A::get($this->options, 'mime', ''));
 
-        $allMimeTypes = Mime::types();
-        $mime = array_search($mime, $allMimeTypes);
-        if ($mime !== false) {
+        if ($mime !== null) {
             return new Response($this->string, $mime);
         } elseif ($snippet === 'feed/json' || Feed::isJson($this->string)) {
             return new Response($this->string, 'json');

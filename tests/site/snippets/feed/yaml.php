@@ -5,7 +5,7 @@
         $entries[] = [
             'id'             => (string) $item->url(),
             'url'            => (string) $item->{$urlfield}(),
-            'title'          => (string) $item->title()->value(),
+            'title'          => (string) $item->{$titlefield}()->value(),
             'content_html'   => (string) $item->{$textfield}()->kirbytext()->value(),
             'date_published' => (string) date('c', $item->{$datefield}()->toTimestamp()),
             'date_modified'  => (string) $item->modified('Y-m-d\TH:i:sP', 'date'),
@@ -20,6 +20,5 @@
         'feed_url'      => (string) $feedurl,
         'items'         => (array) $entries,
     ];
-
 
     echo Kirby\Data\Yaml::encode($feed);

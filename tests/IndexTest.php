@@ -36,7 +36,6 @@ class IndexTest extends TestCase
     {
         $response = kirby()->render('/feed-yaml');
         $this->assertTrue($response->code() === 200);
-        // TODO: https://github.com/getkirby/kirby/issues/2018
-        // $this->assertTrue('application/yaml' === $response->type());
+        $this->assertTrue('application/yaml' === $response->type());
     }
 }
