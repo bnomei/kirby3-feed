@@ -37,7 +37,7 @@ $options = [
     'description' => 'Read the latest news about our company',
     'link'        => 'blog'
 ];
-echo page('blog')->children()->visible()->flip()->limit(10)->feed($options);
+echo page('blog')->children()->listed()->flip()->limit(10)->feed($options);
 ```
 
 **options array defaults**
@@ -76,7 +76,7 @@ return [
                     'description' => 'Read the latest news about our company',
                     'link'        => 'blog'
                 ];
-                $feed = page('blog')->children()->visible()->flip()->limit(10)->feed($options);
+                $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
                 return $feed;
             }
         ]
@@ -108,7 +108,7 @@ The Plugin applies a default sorting for the pages by date/modified in descendin
 
 Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
 ```php
-$feed = page('blog')->children()->visible()->sortBy(function ($page) {
+$feed = page('blog')->children()->listed()->sortBy(function ($page) {
  return $page->date()->toDate();
 }, 'desc')->limit(10)->feed($options);
 ```
