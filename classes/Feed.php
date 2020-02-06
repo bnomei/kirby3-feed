@@ -138,9 +138,9 @@ final class Feed
         $options['items'] = $items;
         $options['link'] = url($options['link']);
 
-        if ($items && $options['datefield'] === 'modified') {
+        if ($items && $items->count() && $options['datefield'] === 'modified') {
             $options['modified'] = $items->first()->modified('r', 'date');
-        } elseif ($items) {
+        } elseif ($items && $items->count()) {
             $datefieldName = $options['datefield'];
             $options['modified'] = date('r', $items->first()->{$datefieldName}()->toTimestamp());
         } else {
