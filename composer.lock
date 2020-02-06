@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9aef632366a16474e1d816ab869b3746",
+    "content-hash": "0019ec78042d4e4327d0df520c1ea665",
     "packages": [
         {
             "name": "getkirby/composer-installer",
@@ -78,8 +78,8 @@
             "authors": [
                 {
                     "name": "Cory LaViska",
-                    "role": "Developer",
-                    "homepage": "http://www.abeautifulsite.net/"
+                    "homepage": "http://www.abeautifulsite.net/",
+                    "role": "Developer"
                 }
             ],
             "description": "A PHP class that makes working with images as simple as possible.",
@@ -618,8 +618,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -1125,9 +1125,9 @@
             "authors": [
                 {
                     "name": "Mathieu Lechat",
-                    "role": "Developer",
                     "email": "math.lechat@gmail.com",
-                    "homepage": "http://matthecat.com"
+                    "homepage": "http://matthecat.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Extract colors from an image as a human would do.",
@@ -1189,9 +1189,9 @@
             "authors": [
                 {
                     "name": "Phil Bennett",
-                    "role": "Developer",
                     "email": "philipobenito@gmail.com",
-                    "homepage": "http://www.philipobenito.com"
+                    "homepage": "http://www.philipobenito.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A fast and intuitive dependency injection container.",
@@ -1237,9 +1237,9 @@
             "authors": [
                 {
                     "name": "Michel Fortin",
-                    "role": "Developer",
                     "email": "michel.fortin@michelf.ca",
-                    "homepage": "https://michelf.ca/"
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
                 },
                 {
                     "name": "John Gruber",
@@ -1813,18 +1813,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -1860,18 +1860,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -1929,9 +1929,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
-                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp"
+                    "homepage": "https://www.facebook.com/satooshi.jp",
+                    "role": "Original creator"
                 },
                 {
                     "name": "Takashi Matsuo",
@@ -2202,8 +2202,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "A tool for quickly measuring the size of a PHP project.",
@@ -2487,8 +2487,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -2529,8 +2529,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -2578,8 +2578,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -3317,8 +3317,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FinderFacade is a convenience wrapper for Symfony's Finder component.",
@@ -3604,8 +3604,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
@@ -3647,8 +3647,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -4639,31 +4639,31 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.3.6",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "38f63e471cda9d37ac06e76d14c5ea2ec5887051"
+                "reference": "491a20dfa87e0b3990170593bc2de0bb34d828a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/38f63e471cda9d37ac06e76d14c5ea2ec5887051",
-                "reference": "38f63e471cda9d37ac06e76d14c5ea2ec5887051",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/491a20dfa87e0b3990170593bc2de0bb34d828a5",
+                "reference": "491a20dfa87e0b3990170593bc2de0bb34d828a5",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
-                "symfony/mime": "^4.3",
+                "symfony/mime": "^4.3|^5.0",
                 "symfony/polyfill-mbstring": "~1.1"
             },
             "require-dev": {
                 "predis/predis": "~1.0",
-                "symfony/expression-language": "~3.4|~4.0"
+                "symfony/expression-language": "^3.4|^4.0|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -4690,7 +4690,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30T12:58:49+00:00"
+            "time": "2020-01-31T09:11:17+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -4786,16 +4786,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v4.3.6",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "3c0e197529da6e59b217615ba8ee7604df88b551"
+                "reference": "225034620ecd4b34fd826e9983d85e2b7a359094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/3c0e197529da6e59b217615ba8ee7604df88b551",
-                "reference": "3c0e197529da6e59b217615ba8ee7604df88b551",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/225034620ecd4b34fd826e9983d85e2b7a359094",
+                "reference": "225034620ecd4b34fd826e9983d85e2b7a359094",
                 "shasum": ""
             },
             "require": {
@@ -4803,14 +4803,17 @@
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
             },
+            "conflict": {
+                "symfony/mailer": "<4.4"
+            },
             "require-dev": {
                 "egulias/email-validator": "^2.1.10",
-                "symfony/dependency-injection": "~3.4|^4.1"
+                "symfony/dependency-injection": "^3.4|^4.1|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -4841,7 +4844,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2019-10-30T12:58:49+00:00"
+            "time": "2020-01-04T13:00:46+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -4957,16 +4960,16 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "6af626ae6fa37d396dc90a399c0ff08e5cfc45b2"
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6af626ae6fa37d396dc90a399c0ff08e5cfc45b2",
-                "reference": "6af626ae6fa37d396dc90a399c0ff08e5cfc45b2",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
                 "shasum": ""
             },
             "require": {
@@ -4980,7 +4983,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -5015,20 +5018,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2019-11-27T13:56:44+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17"
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/b42a2f66e8f1b15ccf25652c3424265923eb4f17",
-                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
                 "shasum": ""
             },
             "require": {
@@ -5040,7 +5043,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -5074,7 +5077,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2019-11-27T14:18:11+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -5137,16 +5140,16 @@
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "04ce3335667451138df4307d6a9b61565560199e"
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/04ce3335667451138df4307d6a9b61565560199e",
-                "reference": "04ce3335667451138df4307d6a9b61565560199e",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/66fea50f6cb37a35eea048d75a7d99a45b586038",
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038",
                 "shasum": ""
             },
             "require": {
@@ -5155,7 +5158,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -5188,7 +5191,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2019-11-27T13:56:44+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -5715,8 +5718,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "lead",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "lead"
                 }
             ],
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
@@ -5756,8 +5759,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
@@ -5902,6 +5905,7 @@
                 "escaper",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-escaper",
             "time": "2018-04-25T15:48:53+00:00"
         }
     ],
