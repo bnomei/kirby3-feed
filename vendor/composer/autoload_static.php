@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit45a522cc481f3a000a8b0f17388d1766
+class ComposerStaticInitf41a0b40f242da487c8bc50469d976e0
 {
     public static $prefixLengthsPsr4 = array (
         'K' => 
@@ -30,6 +30,7 @@ class ComposerStaticInit45a522cc481f3a000a8b0f17388d1766
 
     public static $classMap = array (
         'Bnomei\\Feed' => __DIR__ . '/../..' . '/classes/Feed.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
         'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
         'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
@@ -39,9 +40,9 @@ class ComposerStaticInit45a522cc481f3a000a8b0f17388d1766
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit45a522cc481f3a000a8b0f17388d1766::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit45a522cc481f3a000a8b0f17388d1766::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit45a522cc481f3a000a8b0f17388d1766::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf41a0b40f242da487c8bc50469d976e0::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf41a0b40f242da487c8bc50469d976e0::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf41a0b40f242da487c8bc50469d976e0::$classMap;
 
         }, null, ClassLoader::class);
     }
