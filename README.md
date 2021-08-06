@@ -126,12 +126,21 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 ```php
 [
     'urlfield' => 'url',
-    'titlefield' => 'title',
-    'textfield' => 'text',
     'modified' => time(),
     'snippet' => 'feed/sitemap'
     'mime' => null,
     'sort' => true,
+    'images' => false,
+    'imagesfield' => 'images',
+    'imagetitlefield' => 'title',
+    'imagecaptionfield' => 'caption',
+    'imagelicensefield' => 'license',
+    'videos' => false,
+    'videosfield' => 'videos',
+    'videotitlefield' => 'title',
+    'videothumbnailfield' => 'thumbnail',
+    'videodescriptionfield' => 'description',
+    'videourlfield' => 'url',
 ]
 ```
 
@@ -162,7 +171,9 @@ return [
 see [Kirby Docs -Filtering compendium](https://getkirby.com/docs/cookbook/content/filtering)
 
 ```php
-$feed = site()->index()->listed()->filterBy('template', '!=', 'excludeme')->limit(50000)->sitemap($options);
+$feed = site()->index()->listed()
+    ->filterBy('template', '!=', 'excludeme')
+    ->limit(50000)->sitemap($options);
 ```
 
 

@@ -6,13 +6,13 @@
 >
   <?php foreach($items as $item): ?>
   <url>
-    <loc><?= $item->url() ?></loc>
+    <loc><?= $item->{$urlfield}() ?></loc>
     <?php foreach(kirby()->languages() as $lang): ?>
     <xhtml:link
       rel="alternate"
       hreflang="<?= $lang->code() ?>"
-      href="<?= $item->url($lang->code()) ?>"/>
-      <?php if($lang->isDefault()): ?><link rel="alternate" href="<?= $item->url() ?>" hreflang="x-default" /><?php endif; ?>
+      href="<?= $item->{$urlfield}($lang->code()) ?>"/>
+      <?php if($lang->isDefault()): ?><link rel="alternate" href="<?= $item->{$urlfield}() ?>" hreflang="x-default" /><?php endif; ?>
     <?php endforeach; ?>
     <lastmod><?= $modified ?></lastmod>
     <?php if($images): ?>
