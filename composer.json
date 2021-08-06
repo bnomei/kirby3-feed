@@ -1,8 +1,8 @@
 {
   "name": "bnomei/kirby3-feed",
   "type": "kirby-plugin",
-  "version": "1.3.10",
-  "description": "Generate a RSS/JSON-Feed from a Pages-Collection",
+  "version": "1.4.0",
+  "description": "Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection",
   "license": "MIT",
   "authors": [
     {
@@ -17,7 +17,8 @@
     "rss-feed",
     "rss",
     "feed",
-    "json"
+    "json",
+    "sitemap"
   ],
   "autoload": {
     "psr-4": {
@@ -62,7 +63,6 @@
   "suggest": {
     "bnomei/kirby3-htmlhead": "Best-practice HTML Head Element extendable with snippets.",
     "bnomei/kirby3-security-headers": "CPS headers to make the the web a saver place. Sensible defaults with zero configuration.",
-    "bnomei/kirby3-robots-txt": "Automatic robots.txt. Detects xmlsitemap.",
-    "omz13/kirby3-xmlsitemap": "Adds a xml sitemap"
+    "bnomei/kirby3-robots-txt": "Automatic robots.txt. Detects xmlsitemap."
   }
 }

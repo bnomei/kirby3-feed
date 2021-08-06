@@ -142,4 +142,33 @@ class FeedTest extends TestCase
         $this->assertFalse(Feed::isXml(' '));
         $this->assertFalse(Feed::isXml('<!DOCTYPE html><body></body>'));
     }
+
+    public function testSitemap()
+    {
+        $feed = new Feed(site()->index()->listed()->filterBy('slug', '!=', 'fossa'), [
+            'snippet' => 'feed/sitemap',
+        ]);
+        $options = $feed->option();
+        $this->assertIsArray($options);
+        $this->assertCount(10, $options['items']);
+        $this->assertTrue($options['datefield'] === 'date');
+
+        // create cache since setup flushed it
+        $xmlString = (string) $feed->stringFromSnippet();
+        $this->assertTrue(Feed::isXml($xmlString));
+        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
+
+        // read from cache
+        $xmlString = (string) $feed->stringFromSnippet();
+        $this->assertTrue(Feed::isXml($xmlString));
+        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
+
+        $xmlString = (string) $feed->stringFromSnippet(true);
+        $this->assertTrue(Feed::isXml($xmlString));
+        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
+
+        $dom = new \DOMDocument;
+        $dom->loadXml($xmlString);
+        $this->assertEquals(10, $dom->getElementsByTagName('url')->length);
+    }
 }

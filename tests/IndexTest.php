@@ -25,6 +25,14 @@ class IndexTest extends TestCase
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $response->body());
     }
 
+    public function testFindsSitemapRoute()
+    {
+        $response = kirby()->render('/sitemap.xml');
+        $this->assertTrue($response->code() === 200);
+        $this->assertTrue('text/xml' === $response->type());
+        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $response->body());
+    }
+
     public function testFindsFeedRouteJSON()
     {
         $response = kirby()->render('/feed-json');

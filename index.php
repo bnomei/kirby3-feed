@@ -11,10 +11,19 @@ Kirby::plugin('bnomei/feed', [
     'snippets' => [
         'feed/rss' => __DIR__ . '/snippets/feed/rss.php',
         'feed/json' => __DIR__ . '/snippets/feed/json.php',
+        'feed/sitemap' => __DIR__ . '/snippets/feed/sitemap.php',
     ],
     'pagesMethods' => [ // PAGES not PAGE
         'feed' => function ($options = [], $force = null) {
             $response = \Bnomei\Feed::feed($this, $options, $force);
+            kirby()->response()->type($response->type());
+            return $response;
+        },
+        'sitemap' => function ($options = [], $force = null) {
+            if (!A::get($options, 'snippet')) {
+                $options['snippet'] = 'feed/sitemap';
+            }
+            $response = \Bnomei\Feed::feed($this->filterBy('intendedTemplate', '!=', 'error'), $options, $force);
             kirby()->response()->type($response->type());
             return $response;
         },

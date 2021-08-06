@@ -1,4 +1,4 @@
-# Kirby 3 Feed
+# Kirby 3 Feed and Sitemap
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-feed?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-feed?color=272822)
@@ -7,7 +7,7 @@
 [![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-feed)](https://codeclimate.com/github/bnomei/kirby3-feed) 
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
-Generate a RSS/JSON-Feed from a Pages-Collection.
+Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection.
 
 ## Commercial Usage
 
@@ -16,13 +16,21 @@ This plugin is free but if you use it in a commercial project please consider to
 - [buy me ☕](https://buymeacoff.ee/bnomei) or
 - [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
+
+## Similar Plugins
+
+- [kirby3-xmlsitemap](https://github.com/omz13/kirby3-xmlsitemap)
+- [kirby3-feeds](https://github.com/omz13/kirby3-feeds)
+
+> both have not seen any updates since April 2019
+
 ## Installation
 
 - unzip [master.zip](https://github.com/bnomei/kirby3-feed/archive/master.zip) as folder `site/plugins/kirby3-feed` or
 - `git submodule add https://github.com/bnomei/kirby3-feed.git site/plugins/kirby3-feed` or
 - `composer require bnomei/kirby3-feed`
 
-## Usage
+## Usage Feed
 
 You can use this in a template for a dedicated feed page, in a template controller or a route.
 
@@ -75,8 +83,8 @@ return [
                 $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
                 return $feed;
             }
-        ]
-    ]
+        ],
+    ],
 ];
 ```
 
@@ -108,6 +116,55 @@ $feed = page('blog')->children()->listed()->sortBy(function ($page) {
  return $page->date()->toDate();
 }, 'desc')->limit(10)->feed($options);
 ```
+
+## Usage Sitemap
+
+**options array defaults**
+
+If you use these defaults you need to provide the fields `date (type: date)` and `text (type: text)`.
+
+```php
+[
+    'urlfield' => 'url',
+    'titlefield' => 'title',
+    'textfield' => 'text',
+    'modified' => time(),
+    'snippet' => 'feed/sitemap'
+    'mime' => null,
+    'sort' => true,
+]
+```
+
+**virtual page in site/config.php**
+
+```php
+return [
+    'routes' => [
+        // ... other routes,
+        [
+            'pattern' => 'sitemap.xml',
+            'method' => 'GET',
+            'action'  => function () {
+                $options = [
+                    'images'       => false,
+                    'videos'       => false,
+                ];
+                $feed = site()->index()->listed()->limit(50000)->sitemap($options);
+                return $feed;
+            }
+        ],
+    ],
+];
+```
+
+**example for excluding pages from sitemap**
+
+see [Kirby Docs -Filtering compendium](https://getkirby.com/docs/cookbook/content/filtering)
+
+```php
+$feed = site()->index()->listed()->filterBy('template', '!=', 'excludeme')->limit(50000)->sitemap($options);
+```
+
 
 ## Settings
 

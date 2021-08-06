@@ -47,5 +47,17 @@ return [
                 return $feed;
             },
         ],
+        [
+            'pattern' => 'sitemap.xml',
+            'method' => 'GET',
+            'action'  => function () {
+                $options = [
+                    // 'images'       => false,
+                    // 'videos'       => false,
+                ];
+                $feed = site()->index()->listed()->limit(50000)->sitemap($options);
+                return $feed;
+            }
+        ],
     ],
 ];
