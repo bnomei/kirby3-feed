@@ -181,7 +181,7 @@ $feed = site()->index()->listed()
 
 | bnomei.feed.              | Default        | Description               |            
 |---------------------------|----------------|---------------------------|
-| mime | `null` | to autodetect json or rss-xml otherwise enforce output with a certain MIME type (one of the extensions defined in Kirby's [Mime class](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php), e.g. value `xml` to enforce `application/xml`) |
+| mime | `null` | to autodetect json or rss-xml otherwise enforce output with a certain MIME type (one of the extensions defined in Kirby's [Mime class](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php), e.g. value `xml` to enforce `text/xml`) |
 | expires |`60*24*7` | in minutes |
 
 > The plugin will automatically devalidate the cache if any of the Page-Objects were modified.
