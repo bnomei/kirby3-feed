@@ -16,17 +16,17 @@
     <?php endforeach; ?>
     <lastmod><?= $modified ?></lastmod>
     <?php if($images): ?>
-    <?php foreach($item->{$imagesfield}() as $image): ?>
+    <?php foreach($item->{$imagesfield}() as $image): if($image): ?>
     <image:image>
       <image:loc><?= $image->url() ?></image:loc>
       <?php if($image->{$imagetitlefield}()->isNotEmpty()): ?><image:title><?= $image->{$imagetitlefield}() ?></image:title><?php endif; ?>
       <?php if($image->{$imagecaptionfield}()->isNotEmpty()): ?><image:caption><?= $image->{$imagecaptionfield}() ?></image:caption><?php endif; ?>
       <?php if($image->{$imagelicensefield}()->isNotEmpty()): ?><image:license><?= $image->{$imagelicensefield}() ?></image:license><?php endif; ?>
     </image:image>
-    <?php endforeach; ?>
+    <?php endif; endforeach; ?>
     <?php endif; ?>
     <?php if($videos): ?>
-    <?php foreach($item->{$videosfield}() as $video): ?>
+    <?php foreach($item->{$videosfield}() as $video): if($video): ?>
     <video:video>
       <?php if($image->{$videothumbnailfield}()->isNotEmpty()): ?><video:thumbnail><?= $video->{$videothumbnailfield}() ?></video:thumbnail><?php endif; ?>
       <?php if($image->{$videotitlefield}()->isNotEmpty()): ?><video:title><?= \Kirby\Toolkit\Xml::encode($item->{$videotitlefield}()) ?></video:title><?php endif; ?>
@@ -34,7 +34,7 @@
       <?php if(Str::contains($video->{$videourlfield}(), site()->url())): ?><video:content_loc><?= $video->{$videourlfield}() ?></video:content_loc>
       <?php else: ?><video:player_loc><?= $video->{$videourlfield}() ?></video:player_loc><?php endif; ?>
     </video:video>
-    <?php endforeach; ?>
+    <?php endif; endforeach; ?>
     <?php endif; ?>
     </url>
   <?php endforeach; ?>
