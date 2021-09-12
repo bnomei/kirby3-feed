@@ -14,7 +14,7 @@
       href="<?= $item->{$urlfield}($lang->code()) ?>"/>
       <?php if($lang->isDefault()): ?><link rel="alternate" href="<?= $item->{$urlfield}() ?>" hreflang="x-default" /><?php endif; ?>
     <?php endforeach; ?>
-    <lastmod><?= $modified ?></lastmod>
+    <lastmod><?= $item->modified('Y-m-d') ?></lastmod>
     <?php if($images): ?>
     <?php foreach($item->{$imagesfield}() as $image): if($image): ?>
     <image:image>
