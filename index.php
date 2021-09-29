@@ -23,6 +23,7 @@ Kirby::plugin('bnomei/feed', [
         'sitemap' => function ($options = [], $force = null) {
             if (!A::get($options, 'snippet')) {
                 $options['snippet'] = 'feed/sitemap';
+                $options['dateformat'] = 'c';
             }
             $response = \Bnomei\Feed::feed($this->filterBy('intendedTemplate', '!=', 'error'), $options, $force);
             kirby()->response()->type($response->type());

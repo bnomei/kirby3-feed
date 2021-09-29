@@ -130,6 +130,7 @@ final class Feed
             'mime' => null,
             'sort' => true,
             // sitemap
+            'dateformat' => 'r', // rss => r, sitemap => c
             'xsl' => true,
             'images' => false,
             'imagesfield' => 'images',
@@ -153,10 +154,10 @@ final class Feed
         $options['link'] = url($options['link']);
 
         if ($items && $items->count() && $options['datefield'] === 'modified') {
-            $options['modified'] = $items->first()->modified('r', 'date');
+            $options['modified'] = $items->first()->modified($options['dateformat'], 'date');
         } elseif ($items && $items->count()) {
             $datefieldName = $options['datefield'];
-            $options['modified'] = date('r', $items->first()->{$datefieldName}()->toTimestamp());
+            $options['modified'] = date($options['dateformat'], $items->first()->{$datefieldName}()->toTimestamp());
         } else {
             $options['modified'] = site()->homePage()->modified();
         }

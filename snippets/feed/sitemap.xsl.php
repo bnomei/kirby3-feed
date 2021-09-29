@@ -45,7 +45,7 @@
                       <xsl:variable name="imageURL">
                         <xsl:value-of select="image:loc"/>
                       </xsl:variable>
-                      <img style="width: 112px;" src="{$imageURL}" />
+                      <img style="width: 42px;" src="{$imageURL}" />
                     </xsl:for-each>
                   </td>
                 </tr>
