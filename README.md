@@ -67,6 +67,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
     'textfield' => 'text',
     'modified' => time(),
     'snippet' => 'feed/rss', // 'feed/json'
+    'dateformat' => 'r',
     'mime' => null,
     'sort' => true,
 ]
@@ -131,6 +132,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 
 ```php
 [
+    'dateformat' => 'c',
     'xsl' => true,
     'urlfield' => 'url',
     'modified' => time(),
