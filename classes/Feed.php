@@ -130,6 +130,7 @@ final class Feed
             'mime' => null,
             'sort' => true,
             // sitemap
+            'xsl' => true,
             'images' => false,
             'imagesfield' => 'images',
             'imagetitlefield' => 'title',
@@ -173,8 +174,7 @@ final class Feed
 
         if ($mime !== null) {
             return new Response($this->string, $mime);
-        } 
-        elseif ($snippet === 'feed/sitemap' && Feed::isXml($this->string)) {
+        } elseif ($snippet === 'feed/sitemap' && Feed::isXml($this->string)) {
             return new Response($this->string, 'xml');
         } elseif ($snippet === 'feed/json' || Feed::isJson($this->string)) {
             return new Response($this->string, 'json');

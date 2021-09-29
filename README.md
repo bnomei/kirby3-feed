@@ -131,6 +131,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 
 ```php
 [
+    'xsl' => true,
     'urlfield' => 'url',
     'modified' => time(),
     'snippet' => 'feed/sitemap'
@@ -166,6 +167,17 @@ return [
                 ];
                 $feed = site()->index()->listed()->limit(50000)->sitemap($options);
                 return $feed;
+            }
+        ],
+        // (optional) Add stylesheet for human readable version of the xml file.
+        // With that stylesheet visiting the xml in a browser will per-generate the images.
+        // The images will NOT be pre-generated if the xml file is downloaded (by google).
+        [
+            'pattern' => 'sitemap.xsl',
+            'method' => 'GET',
+            'action'  => function () {
+                snippet('feed/sitemapxsl');
+                die;
             }
         ],
     ],

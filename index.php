@@ -12,6 +12,7 @@ Kirby::plugin('bnomei/feed', [
         'feed/rss' => __DIR__ . '/snippets/feed/rss.php',
         'feed/json' => __DIR__ . '/snippets/feed/json.php',
         'feed/sitemap' => __DIR__ . '/snippets/feed/sitemap.php',
+        'feed/sitemapxsl' => __DIR__ . '/snippets/feed/sitemap.xsl.php',
     ],
     'pagesMethods' => [ // PAGES not PAGE
         'feed' => function ($options = [], $force = null) {
