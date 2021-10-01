@@ -9,7 +9,7 @@
 
 Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection.
 
-## Commerical Usage
+## Commercial Usage
 
 > <br>
 ><b>Support open source!</b><br><br>
