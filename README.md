@@ -73,7 +73,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
 ]
 ```
 
-**virtual page in site/config.php**
+**virtual page in site/config/config.php**
 
 ```php
 return [
