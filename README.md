@@ -136,7 +136,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
     'xsl' => true,
     'urlfield' => 'url',
     'modified' => time(),
-    'snippet' => 'feed/sitemap'
+    'snippet' => 'feed/sitemap',
     'mime' => null,
     'sort' => true,
     'images' => false,
