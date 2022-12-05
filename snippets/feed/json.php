@@ -1,4 +1,5 @@
 <?php
+
     $entries = [];
     foreach ($items as $item) {
         $entries[] = [

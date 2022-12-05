@@ -1,4 +1,5 @@
 <?php
+
     // NOTE: unless values are explicit cast yaml ties to resolve kirbys recursive tree
     $entries = [];
     foreach ($items as $item) {

@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-feed",
   "type": "kirby-plugin",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection",
   "license": "MIT",
   "authors": [
@@ -27,10 +27,13 @@
   },
   "config": {
     "optimize-autoloader": true,
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
   },
   "require": {
-    "php": ">=7.3.0",
+    "php": ">=8.0",
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {

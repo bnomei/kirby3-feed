@@ -167,7 +167,7 @@ class FeedTest extends TestCase
         $this->assertTrue(Feed::isXml($xmlString));
         $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $xmlString);
 
-        $dom = new \DOMDocument;
+        $dom = new \DOMDocument();
         $dom->loadXml($xmlString);
         $this->assertEquals(10, $dom->getElementsByTagName('url')->length);
     }
