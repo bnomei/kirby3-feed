@@ -18,6 +18,10 @@
         'description'   => $description,
         'home_page_url' => $url,
         'feed_url'      => $feedurl,
+        'author'        => [
+            'name' => $author_name,
+            'url' => $author_url
+        ],
         'items'         => $entries,
     ];
     echo json_encode($feed);
