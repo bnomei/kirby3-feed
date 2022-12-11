@@ -12,7 +12,7 @@
       rel="alternate"
       hreflang="<?= $lang->code() ?>"
       href="<?= $item->{$urlfield}($lang->code()) ?>"/>
-      <?php if ($lang->isDefault()): ?><link rel="alternate" href="<?= $item->{$urlfield}() ?>" hreflang="x-default" /><?php endif; ?>
+      <?php if ($lang->isDefault()): ?><xhtml:link rel="alternate" href="<?= $item->{$urlfield}() ?>" hreflang="x-default" /><?php endif; ?>
     <?php endforeach; ?>
     <lastmod><?= date('c', $item->modified()) ?></lastmod>
     <?php if ($images): ?>
