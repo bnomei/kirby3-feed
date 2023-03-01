@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Bnomei;
 
+use Kirby\Cms\Field;
 use Kirby\Cms\Pages;
 use Kirby\Exception\DuplicateException;
 use Kirby\Exception\InvalidArgumentException;
@@ -158,7 +159,7 @@ final class Feed
             $options['modified'] = $modified;
 
             $datefield = $items->first()->{$options['datefield']}();
-            if ($datefield->isNotEmpty()) {
+            if ($datefield instanceof Field && $datefield->isNotEmpty()) {
                 $options['date'] = date($options['dateformat'], $datefield->toTimestamp());
             }
         } else {
