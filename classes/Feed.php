@@ -63,7 +63,7 @@ final class Feed
         $key = $this->modifiedHashFromKeys();
 
         $string = null;
-        if (! $force) {
+        if (!$force) {
             $string = kirby()->cache('bnomei.feed')->get($key);
         }
         if ($string) {
@@ -77,7 +77,7 @@ final class Feed
             true
         ));
 
-        if (! option('debug')) {
+        if (!option('debug')) {
             kirby()->cache('bnomei.feed')->set(
                 $key,
                 $string,
@@ -153,16 +153,18 @@ final class Feed
         $options['items'] = $items;
         $options['link'] = url($options['link']);
 
-        $modified = $items->first()->modified($options['dateformat'], 'date');
-        if ($items && $items->count() && $options['datefield'] === 'modified') {
+        if ($items && $items->count()) {
+            $modified = $items->first()->modified($options['dateformat'], 'date');
             $options['modified'] = $modified;
-        } elseif ($items && $items->count()) {
-            $datefieldName = $options['datefield'];
-            $options['modified'] = $items->first()->{$datefieldName}()->isNotEmpty() ? date($options['dateformat'], $items->first()->{$datefieldName}()->toTimestamp()) : $modified;
+
+            $datefield = $items->first()->{$options['datefield']}();
+            if ($datefield->isNotEmpty()) {
+                $options['date'] = $datefield->toDate($options['dateformat']);
+            }
         } else {
             $options['modified'] = site()->homePage()->modified();
         }
-        
+
         return $options;
     }
 
@@ -216,7 +218,7 @@ final class Feed
      */
     public static function isXml($content): bool
     {
-        if (! $content) {
+        if (!$content) {
             return false;
         }
         if (is_string($content) && strlen(trim($content)) === 0) {
