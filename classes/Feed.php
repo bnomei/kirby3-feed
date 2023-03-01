@@ -153,15 +153,16 @@ final class Feed
         $options['items'] = $items;
         $options['link'] = url($options['link']);
 
+        $modified = $items->first()->modified($options['dateformat'], 'date');
         if ($items && $items->count() && $options['datefield'] === 'modified') {
-            $options['modified'] = $items->first()->modified($options['dateformat'], 'date');
+            $options['modified'] = $modified;
         } elseif ($items && $items->count()) {
             $datefieldName = $options['datefield'];
-            $options['modified'] = date($options['dateformat'], $items->first()->{$datefieldName}()->toTimestamp());
+            $options['modified'] = $items->first()->{$datefieldName}()->isNotEmpty() ? date($options['dateformat'], $items->first()->{$datefieldName}()->toTimestamp()) : $modified;
         } else {
             $options['modified'] = site()->homePage()->modified();
         }
-
+        
         return $options;
     }
 
