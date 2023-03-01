@@ -159,7 +159,7 @@ final class Feed
 
             $datefield = $items->first()->{$options['datefield']}();
             if ($datefield->isNotEmpty()) {
-                $options['date'] = $datefield->toDate($options['dateformat']);
+                $options['date'] = date($options['dateformat'], $datefield->toTimestamp());
             }
         } else {
             $options['modified'] = site()->homePage()->modified();
