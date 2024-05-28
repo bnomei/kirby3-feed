@@ -7,10 +7,10 @@ Kirby::plugin('bnomei/feed', [
         'cache' => true,
         'debugforce' => true,
         'sitemap' => [
-            'enabled' => true,
+            'enable' => true,
         ],
         'feed' => [
-            'enabled' => true,
+            'enable' => true,
         ],
         'expires' => (60*24*7), // minutes
     ],
@@ -22,7 +22,7 @@ Kirby::plugin('bnomei/feed', [
     ],
     'pagesMethods' => [ // PAGES not PAGE
         'feed' => function ($options = [], $force = null) {
-            if (option('bnomei.feed.feed.enabled') !== true) {
+            if (option('bnomei.feed.feed.enable') !== true) {
                 return;
             }
             $response = \Bnomei\Feed::feed($this, $options, $force);
@@ -30,7 +30,7 @@ Kirby::plugin('bnomei/feed', [
             return $response;
         },
         'sitemap' => function ($options = [], $force = null) {
-            if (option('bnomei.feed.sitemap.enabled') !== true) {
+            if (option('bnomei.feed.sitemap.enable') !== true) {
                 return;
             }
             if (!A::get($options, 'snippet')) {
