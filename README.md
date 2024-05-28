@@ -1,4 +1,4 @@
-# Kirby 3 Feed and Sitemap
+# Kirby 3/4 Feed and Sitemap
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-feed?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-feed?color=272822)

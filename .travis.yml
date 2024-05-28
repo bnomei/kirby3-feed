@@ -1,5 +1,5 @@
 language: php
-php: 8.0
+php: 8.1
 matrix:
   fast_finish: true
 install: composer install --no-interaction
