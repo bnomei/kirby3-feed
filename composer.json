@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-feed",
   "type": "kirby-plugin",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection",
   "license": "MIT",
   "authors": [

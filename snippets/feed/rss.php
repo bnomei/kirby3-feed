@@ -1,11 +1,10 @@
 <?php
 echo '<?xml version="1.0" encoding="utf-8"?>';
-?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+?><rss version="2.0">
   <channel>
     <title><?= \Kirby\Toolkit\Xml::encode($title) ?></title>
     <link><?= \Kirby\Toolkit\Xml::encode($link) ?></link>
     <lastBuildDate><?= $modified ?></lastBuildDate>
-    <atom:link href="<?= \Kirby\Toolkit\Xml::encode($feedurl) ?>" rel="self" type="application/rss+xml" />
     <?php if ($description && is_string($description) && strlen(trim($description)) > 0): ?>
     <description><?= \Kirby\Toolkit\Xml::encode($description) ?></description>
     <?php endif; ?>

@@ -124,6 +124,7 @@ final class Feed
             'link' => site()->url(),
             'urlfield' => 'url',
             'titlefield' => 'title',
+            'idfield' => 'id',
             'datefield' => 'date',
             'textfield' => 'text',
             'modified' => time(),
@@ -180,6 +181,8 @@ final class Feed
         if ($mime !== null) {
             return new Response($this->string, $mime);
         } elseif ($snippet === 'feed/sitemap' && Feed::isXml($this->string)) {
+            return new Response($this->string, 'xml');
+        } elseif ($snippet === 'feed/atom' || Feed::isXml($this->string)) {
             return new Response($this->string, 'xml');
         } elseif ($snippet === 'feed/json' || Feed::isJson($this->string)) {
             return new Response($this->string, 'json');

@@ -66,7 +66,7 @@ If you use these defaults you need to provide the fields `date (type: date)` and
     'datefield' => 'date',
     'textfield' => 'text',
     'modified' => time(),
-    'snippet' => 'feed/rss', // 'feed/json'
+    'snippet' => 'feed/rss', // 'feed/json', 'feed/atom'
     'dateformat' => 'r',
     'mime' => null,
     'sort' => true,

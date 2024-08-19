@@ -15,6 +15,7 @@ Kirby::plugin('bnomei/feed', [
         'expires' => (60*24*7), // minutes
     ],
     'snippets' => [
+        'feed/atom' => __DIR__ . '/snippets/feed/atom.php',
         'feed/rss' => __DIR__ . '/snippets/feed/rss.php',
         'feed/json' => __DIR__ . '/snippets/feed/json.php',
         'feed/sitemap' => __DIR__ . '/snippets/feed/sitemap.php',
