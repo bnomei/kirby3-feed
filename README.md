@@ -154,7 +154,7 @@ return [
                 // return site()->index()->listed()->limit(50000)->sitemap();
                 
                 // using a closure allows for better performance on a cache hit
-                sitemap(fn() => site()->index()->listed()->limit(50000));
+                return sitemap(fn() => site()->index()->listed()->limit(50000));
             }
         ],
         // (optional) Add stylesheet for human readable version of the xml file.
@@ -177,9 +177,10 @@ return [
 see the official Kirby documentation: [Filtering compendium](https://getkirby.com/docs/cookbook/content/filtering)
 
 ```php
-$feed = site()->index()->listed()
+return sitemap(fn() => site()->index()->listed()
     ->filterBy('template', '!=', 'excludeme')
-    ->limit(50000)->sitemap($options);
+    ->limit(50000)
+);
 ```
 
 ## Settings
