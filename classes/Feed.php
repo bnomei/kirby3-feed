@@ -50,8 +50,9 @@ class Feed
             return $this;
         }
 
-        // cache miss, load items now
+        // cache miss, load items and dynamic options now
         $this->loadItems();
+        $this->dynamicOptions();
 
         // render snippet with items in options
         $this->string = trim(strval(snippet(A::get($this->options, 'snippet'), $this->options, true)));
@@ -96,8 +97,14 @@ class Feed
             $items = $items->sortBy($this->options['datefield'], 'desc');
         }
         $this->options['items'] = $items;
+    }
+
+    private function dynamicOptions(): void
+    {
         $this->options['link'] = url($this->options['link']);
 
+        /** @var Pages $items */
+        $items = $this->options['items'];
         if ($items->count()) {
             $modified = $items->first()->modified($this->options['dateformat'], 'date');
             $this->options['modified'] = $modified;
@@ -116,19 +123,20 @@ class Feed
         $snippet = A::get($this->options, 'snippet');
         $mime = Mime::fromExtension(A::get($this->options, 'mime', ''));
 
+        $response = null;
         if ($mime !== null) {
-            return new Response($this->string, $mime);
+            $response = new Response($this->string, $mime);
         } elseif ($snippet === 'feed/sitemap' && Feed::isXml($this->string)) {
-            return new Response($this->string, 'xml');
+            $response = new Response($this->string, 'xml');
         } elseif ($snippet === 'feed/atom' && Feed::isXml($this->string)) {
-            return new Response($this->string, 'xml');
+            $response = new Response($this->string, 'xml');
         } elseif ($snippet === 'feed/json' && Feed::isJson($this->string)) {
-            return new Response($this->string, 'json');
+            $response = new Response($this->string, 'json');
         } elseif ($snippet === 'feed/rss' && Feed::isXml($this->string)) {
-            return new Response($this->string, 'rss');
+            $response = new Response($this->string, 'rss');
         }
 
-        return new Response('Error: Feed Response', null, 500);
+        return $response ?? new Response('Error: Feed Response', null, 500);
     }
 
     public static function feed(Pages|Closure $pages, array $options = []): Response
