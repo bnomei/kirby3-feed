@@ -28,15 +28,6 @@ class Feed
         }
     }
 
-    public function option(?string $key = null): mixed
-    {
-        if ($key) {
-            return A::get($this->options, $key);
-        }
-
-        return $this->options;
-    }
-
     public function __toString(): string
     {
         return $this->string;
