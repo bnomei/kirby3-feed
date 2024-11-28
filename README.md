@@ -195,7 +195,7 @@ return sitemap(fn() => site()->index()->listed()
 > [!Warning]
 > If the **global** debug option is set to `true` the plugin will automatically flush its own cache. The plugin will automatically in-validate the cache if any of the Page objects in given Pages-Collection were modified with the Panel.
 
-If you need to flush the cache manually, like after automated deployments or transfering files via FTP, you can use the following code:
+If you need to flush the cache manually, like after automated deployments or transferring files via FTP, you can use the following code:
 
 ```php
 \Bnomei\Feed::flush();
