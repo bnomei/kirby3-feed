@@ -13,6 +13,7 @@ return [
                     'link' => 'blog',
                 ];
                 $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
+
                 return $feed;
             },
         ],
@@ -25,9 +26,10 @@ return [
                     'description' => 'Read the latest news about our company',
                     'link' => 'blog',
                     'feedurl' => '/feed-json',
-                    'snippet' => 'feed/json'
+                    'snippet' => 'feed/json',
                 ];
                 $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
+
                 return $feed;
             },
         ],
@@ -41,23 +43,25 @@ return [
                     'link' => 'blog',
                     'feedurl' => '/feed-yaml',
                     'snippet' => 'feed/yaml',
-                    'mime' => 'yaml'
+                    'mime' => 'yaml',
                 ];
                 $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
+
                 return $feed;
             },
         ],
         [
             'pattern' => 'sitemap.xml',
             'method' => 'GET',
-            'action'  => function () {
+            'action' => function () {
                 $options = [
                     // 'images'       => false,
                     // 'videos'       => false,
                 ];
                 $feed = site()->index()->listed()->limit(50000)->sitemap($options);
+
                 return $feed;
-            }
+            },
         ],
     ],
 ];

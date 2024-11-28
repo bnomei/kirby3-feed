@@ -1,3 +1,3 @@
 <?php
 
-    echo $page->title()->value();
+echo $page->title()->value();

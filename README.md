@@ -1,4 +1,4 @@
-# Kirby Feed and Sitemap
+# Kirby Atom/JSON/RSS-Feed and XML-Sitemap
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-feed?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-feed?color=272822)
@@ -7,14 +7,7 @@
 [![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-feed)](https://codeclimate.com/github/bnomei/kirby3-feed) 
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
-Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection.
-
-## Similar Plugins
-
-- [kirby3-xmlsitemap](https://github.com/omz13/kirby3-xmlsitemap)
-- [kirby3-feeds](https://github.com/omz13/kirby3-feeds)
-
-> both have not seen any updates since April 2019
+Generate a Atom/JSON/RSS-Feed and XML-Sitemap from Pages-Collection.
 
 ## Installation
 
@@ -29,37 +22,37 @@ You can use this in a template for a dedicated feed page, in a template controll
 ```php
 <?php
 $options = [
-    'title'       => 'Latest articles',
+    'title' => 'Latest articles',
     'description' => 'Read the latest news about our company',
-    'link'        => 'blog'
+    'link' => 'blog'
 ];
 echo page('blog')->children()->listed()->flip()->limit(10)->feed($options);
 ```
 
-**options array defaults**
+### options array defaults
 
 If you use these defaults you need to provide the fields `date (type: date)` and `text (type: text)`.
 
 ```php
 [
-    'url' => site()->url(),
-    'feedurl' => site()->url() . '/feed/',
-    'title' => 'Feed',
-    'description' => '',
-    'link' => site()->url(),
-    'urlfield' => 'url',
-    'titlefield' => 'title',
     'datefield' => 'date',
-    'textfield' => 'text',
+    'dateformat' => 'r',
+    'description' => '',
+    'feedurl' => site()->url() . '/feed/',
+    'link' => site()->url(),
+    'mime' => null,
     'modified' => time(),
     'snippet' => 'feed/rss', // 'feed/json', 'feed/atom'
-    'dateformat' => 'r',
-    'mime' => null,
     'sort' => true,
+    'textfield' => 'text',
+    'title' => 'Feed',
+    'titlefield' => 'title',
+    'url' => site()->url(),
+    'urlfield' => 'url',
 ]
 ```
 
-**virtual page in site/config/config.php**
+### virtual page in site/config/config.php
 
 ```php
 return [
@@ -69,19 +62,24 @@ return [
             'method' => 'GET',
             'action'  => function () {
                 $options = [
-                    'title'       => 'Latest articles',
+                    'title' => 'Latest articles',
                     'description' => 'Read the latest news about our company',
-                    'link'        => 'blog'
+                    'link' => 'blog',
+                    'feedurl' => site()->url() . '/feed/', // matches pattern above
                 ];
-                $feed = page('blog')->children()->listed()->flip()->limit(10)->feed($options);
-                return $feed;
+                
+                // while this would be possible
+                // return page('blog')->children()->listed()->flip()->limit(10)->feed($options);
+                
+                // using a closure allows for better performance on a cache hit
+                return feed(fn() => page('blog')->children()->listed()->flip()->limit(10), $options);
             }
         ],
     ],
 ];
 ```
 
-**HTML head element**
+### HTML head element
 
 rss xml
 ```php
@@ -94,14 +92,14 @@ and/or rss json
 
 > TIP: Having multiple feed links is still valid html. So you can have both rss and json if you want and setup the routes properly.
 
-**Sorting**
+### Sorting
 
 The Plugin applies a default sorting for the pages by date/modified in descending order (newest first). 
 
 - If you do not want this you have to set the `datefield` setting to another Field name or PageMethod name.
 - If you want to disable sorting by the plugin and add your own you can set the option `sort` to `false`.
 
-**Pitfalls when presorting by date and limit**
+### Pitfalls when presorting by date and limit
 
 Using `sortBy('date', 'desc')` will **not** yield expected results! In K3 sorting by date needs a callback.
 ```php
@@ -112,34 +110,35 @@ $feed = page('blog')->children()->listed()->sortBy(function ($page) {
 
 ## Usage Sitemap
 
-**options array defaults**
+### options array defaults
 
 If you use these defaults you need to provide the fields `date (type: date)` and `text (type: text)`.
 
 ```php
 [
     'dateformat' => 'c',
-    'xsl' => true,
-    'urlfield' => 'url',
-    'modified' => time(),
-    'snippet' => 'feed/sitemap',
-    'mime' => null,
-    'sort' => true,
+    'feedurl' => site()->url().'/sitemap.xml',
+    'imagecaptionfield' => 'caption',
+    'imagelicensefield' => 'license',
     'images' => false,
     'imagesfield' => 'images',
     'imagetitlefield' => 'title',
-    'imagecaptionfield' => 'caption',
-    'imagelicensefield' => 'license',
+    'mime' => null,
+    'modified' => time(),
+    'snippet' => 'feed/sitemap',
+    'sort' => true,
+    'urlfield' => 'url',
+    'videodescriptionfield' => 'description',
     'videos' => false,
     'videosfield' => 'videos',
-    'videotitlefield' => 'title',
     'videothumbnailfield' => 'thumbnail',
-    'videodescriptionfield' => 'description',
+    'videotitlefield' => 'title',
     'videourlfield' => 'url',
+    'xsl' => true,
 ]
 ```
 
-**virtual page in site/config.php**
+### virtual page in site/config.php
 
 ```php
 return [
@@ -149,12 +148,11 @@ return [
             'pattern' => 'sitemap.xml',
             'method' => 'GET',
             'action'  => function () {
-                $options = [
-                    'images'       => false,
-                    'videos'       => false,
-                ];
-                $feed = site()->index()->listed()->limit(50000)->sitemap($options);
-                return $feed;
+                // while this would be possible
+                // return site()->index()->listed()->limit(50000)->sitemap();
+                
+                // using a closure allows for better performance on a cache hit
+                sitemap(fn() => site()->index()->listed()->limit(50000));
             }
         ],
         // (optional) Add stylesheet for human readable version of the xml file.
@@ -172,9 +170,9 @@ return [
 ];
 ```
 
-**example for excluding pages from sitemap**
+### example for excluding pages from sitemap
 
-see [Kirby Docs -Filtering compendium](https://getkirby.com/docs/cookbook/content/filtering)
+see the official Kirby documentation: [Filtering compendium](https://getkirby.com/docs/cookbook/content/filtering)
 
 ```php
 $feed = site()->index()->listed()
@@ -182,19 +180,23 @@ $feed = site()->index()->listed()
     ->limit(50000)->sitemap($options);
 ```
 
-
 ## Settings
 
-| bnomei.feed.              | Default        | Description               |            
-|---------------------------|----------------|---------------------------|
-| mime | `null` | to autodetect json or rss-xml otherwise enforce output with a certain MIME type (one of the extensions defined in Kirby's [Mime class](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php), e.g. value `xml` to enforce `text/xml`) |
-| expires |`60*24*7` | in minutes |
+| bnomei.feed.              | Default        | Description                                          |            
+|---------------------------|----------------|------------------------------------------------------|
+| expires |`60*24*7` | expire cache in minutes, or on any change to content |
 
-> The plugin will automatically devalidate the cache if any of the Page-Objects were modified.
 
 ## Cache
 
-If the **global** debug option is set to `true` the plugin will automatically flush its own cache and not write to the cache.
+> [!Warning]
+> If the **global** debug option is set to `true` the plugin will automatically flush its own cache. The plugin will automatically in-validate the cache if any of the Page objects in given Pages-Collection were modified.
+
+If you need to flush the cache manually, like after automated deployments, you can use the following code:
+
+```php
+\Bnomei\Feed::flush();
+```
 
 ## Disclaimer
 

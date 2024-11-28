@@ -5,10 +5,10 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
     <title><?= \Kirby\Toolkit\Xml::encode($title) ?></title>
     <link><?= \Kirby\Toolkit\Xml::encode($link) ?></link>
     <lastBuildDate><?= $modified ?></lastBuildDate>
-    <?php if ($description && is_string($description) && strlen(trim($description)) > 0): ?>
+    <?php if ($description && is_string($description) && strlen(trim($description)) > 0) { ?>
     <description><?= \Kirby\Toolkit\Xml::encode($description) ?></description>
-    <?php endif; ?>
-    <?php foreach ($items as $item): ?>
+    <?php } ?>
+    <?php foreach ($items as $item) { ?>
     <item>
       <title><?= \Kirby\Toolkit\Xml::encode($item->{$titlefield}()) ?></title>
       <link><?= \Kirby\Toolkit\Xml::encode($item->{$urlfield}()) ?></link>
@@ -16,6 +16,6 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <pubDate><?= $datefield === 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>
       <description><![CDATA[<?= $item->{$textfield}()->kirbytext() ?>]]></description>
     </item>
-    <?php endforeach; ?>
+    <?php } ?>
   </channel>
 </rss>

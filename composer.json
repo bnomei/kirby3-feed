@@ -1,8 +1,8 @@
 {
   "name": "bnomei/kirby3-feed",
   "type": "kirby-plugin",
-  "version": "1.7.0",
-  "description": "Generate a RSS/JSON/Sitemap-Feed from a Pages-Collection",
+  "version": "5.0.0",
+  "description": "Generate a Atom/JSON/RSS-Feed and XML-Sitemap from Pages-Collections",
   "license": "MIT",
   "authors": [
     {
@@ -15,41 +15,45 @@
     "kirby-cms",
     "kirby-plugin",
     "rss-feed",
+    "atom-feed",
+    "atom",
     "rss",
     "feed",
+    "json-feed",
     "json",
+    "sitemap-xml",
     "sitemap"
   ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true,
+      "pestphp/pest-plugin": true
+    }
+  },
   "autoload": {
     "psr-4": {
       "Bnomei\\": "classes/"
     }
   },
-  "config": {
-    "optimize-autoloader": true,
-    "sort-packages": true,
-    "allow-plugins": {
-      "getkirby/composer-installer": true
-    }
-  },
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
-    "getkirby/cms": "^4.0",
-    "php-coveralls/php-coveralls": "^2.4",
-    "phpunit/phpunit": "^9.5"
+    "getkirby/cms": "^5.0.0-alpha.4",
+    "larastan/larastan": "^v3.0.0",
+    "laravel/pint": "^1.13",
+    "pestphp/pest": "^v3.5.1",
+    "spatie/ray": "^1.39"
   },
   "scripts": {
-    "analyze": "phpstan analyse classes",
-    "fix": "php-cs-fixer fix",
-    "test": [
-      "mkdir -p tests/logs",
-      "@putenv XDEBUG_MODE=coverage",
-      "phpunit --configuration ./phpunit.xml"
-    ],
+    "stan": "./vendor/bin/phpstan",
+    "fix": "./vendor/bin/pint",
+    "test": "./vendor/bin/pest --profile",
     "dist": [
+      "composer fix",
       "composer install --no-dev --optimize-autoloader",
       "git rm -rf --cached .; git add .;"
     ],
@@ -57,7 +61,9 @@
       "composer install",
       "composer update",
       "composer install --working-dir=tests/kirby --no-dev --optimize-autoloader",
-      "composer update --working-dir=tests/kirby"
+      "composer update --working-dir=tests/kirby",
+      "sed -i.bak 's/function dump(/function xdump(/g' tests/kirby/config/helpers.php",
+      "sed -i.bak 's/function e(/function xe(/g' tests/kirby/config/helpers.php"
     ]
   },
   "extra": {
@@ -65,7 +71,7 @@
   },
   "suggest": {
     "bnomei/kirby3-htmlhead": "Best-practice HTML Head Element extendable with snippets.",
-    "bnomei/kirby3-security-headers": "CPS headers to make the the web a saver place. Sensible defaults with zero configuration.",
-    "bnomei/kirby3-robots-txt": "Automatic robots.txt. Detects xmlsitemap."
+    "bnomei/kirby3-robots-txt": "Automatic virtual robots.txt with auto-detection of XML-Sitemaps from plugins.",
+    "bnomei/kirby3-security-headers": "CSP headers to make the the web a saver place. Sensible defaults with zero configuration."
   }
 }

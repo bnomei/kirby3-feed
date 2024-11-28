@@ -1,49 +1,33 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+test('finds home page', function () {
+    $response = kirby()->render('/');
+    expect($response->code() === 200)->toBeTrue();
+    $this->assertStringContainsString('Home', $response->body());
+});
 
-class IndexTest extends TestCase
-{
-    protected function setUp(): void
-    {
-        $this->setOutputCallback(function () {
-        });
-    }
+test('finds feed route', function () {
+    $response = kirby()->render('/feed');
+    expect($response->code() === 200)->toBeTrue()
+        ->and($response->type() === 'application/rss+xml')->toBeTrue()
+        ->and($response->body())->toStartWith('<?xml version="1.0" encoding="utf-8"?>');
+});
 
-    public function testFindsHomePage()
-    {
-        $response = kirby()->render('/');
-        $this->assertTrue($response->code() === 200);
-        $this->assertStringContainsString('Home', $response->body());
-    }
+test('finds sitemap route', function () {
+    $response = kirby()->render('/sitemap.xml');
+    expect($response->code() === 200)->toBeTrue()
+        ->and($response->type() === 'text/xml')->toBeTrue()
+        ->and($response->body())->toStartWith('<?xml version="1.0" encoding="utf-8"?>');
+});
 
-    public function testFindsFeedRoute()
-    {
-        $response = kirby()->render('/feed');
-        $this->assertTrue($response->code() === 200);
-        $this->assertTrue('application/rss+xml' === $response->type());
-        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $response->body());
-    }
+test('finds feed route json', function () {
+    $response = kirby()->render('/feed-json');
+    expect($response->code() === 200)->toBeTrue()
+        ->and($response->type() === 'application/json')->toBeTrue();
+});
 
-    public function testFindsSitemapRoute()
-    {
-        $response = kirby()->render('/sitemap.xml');
-        $this->assertTrue($response->code() === 200);
-        $this->assertTrue('text/xml' === $response->type());
-        $this->assertStringStartsWith('<?xml version="1.0" encoding="utf-8"?>', $response->body());
-    }
-
-    public function testFindsFeedRouteJSON()
-    {
-        $response = kirby()->render('/feed-json');
-        $this->assertTrue($response->code() === 200);
-        $this->assertTrue('application/json' === $response->type());
-    }
-
-    public function testFindsFeedRouteYAML()
-    {
-        $response = kirby()->render('/feed-yaml');
-        $this->assertTrue($response->code() === 200);
-        $this->assertTrue('application/yaml' === $response->type());
-    }
-}
+test('finds feed route yaml', function () {
+    $response = kirby()->render('/feed-yaml');
+    expect($response->code() === 200)->toBeTrue()
+        ->and($response->type() === 'application/yaml')->toBeTrue();
+});

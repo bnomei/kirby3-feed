@@ -1,0 +1,15 @@
+parameters:
+    level: 9
+    paths:
+        - classes
+        - index.php
+    excludePaths:
+        - tests
+
+    ignoreErrors:
+        - '#Undefined variable: \$this#'
+        - '#Parameter \#1 \$value of function strval expects#'
+        - '#Parameter \#1 \$value of function intval expects#'
+        - '#Call to an undefined method Kirby\\Content\\Field::#'
+        -
+            identifier: missingType.iterableValue
