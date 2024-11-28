@@ -1,11 +1,13 @@
 # Kirby Atom/JSON/RSS-Feed and XML-Sitemap
 
-![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-feed?color=ae81ff)
-![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-feed?color=272822)
-[![Build Status](https://flat.badgen.net/travis/bnomei/kirby3-feed)](https://travis-ci.com/bnomei/kirby3-feed)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/bnomei/kirby3-feed)](https://coveralls.io/github/bnomei/kirby3-feed) 
-[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-feed)](https://codeclimate.com/github/bnomei/kirby3-feed) 
-[![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
+[![Kirby 5](https://flat.badgen.net/badge/Kirby/5?color=ECC748)](https://getkirby.com)
+![PHP 8.2](https://flat.badgen.net/badge/PHP/8.2?color=4E5B93&icon=php&label)
+![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-feed?color=ae81ff&icon=github&label)
+![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-feed?color=272822&icon=github&label)
+[![Coverage](https://flat.badgen.net/codeclimate/coverage/bnomei/kirby3-feed?icon=codeclimate&label)](https://codeclimate.com/github/bnomei/kirby3-feed)
+[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-feed?icon=codeclimate&label)](https://codeclimate.com/github/bnomei/kirby3-feed/issues)
+[![Discord](https://flat.badgen.net/badge/discord/bnomei?color=7289da&icon=discord&label)](https://discordapp.com/users/bnomei)
+[![Buymecoffee](https://flat.badgen.net/badge/icon/donate?icon=buymeacoffee&color=FF813F&label)](https://www.buymeacoffee.com/bnomei)
 
 Generate a Atom/JSON/RSS-Feed and XML-Sitemap from Pages-Collection.
 
