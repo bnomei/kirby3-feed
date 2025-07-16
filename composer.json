@@ -3,6 +3,7 @@
   "type": "kirby-plugin",
   "version": "5.0.2",
   "description": "Generate a Atom/JSON/RSS-Feed and XML-Sitemap from Pages-Collections",
+  "homepage": "https://github.com/bnomei/kirby3-feed",
   "license": "MIT",
   "authors": [
     {
