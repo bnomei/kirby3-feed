@@ -15,6 +15,8 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
       <guid><?= \Kirby\Toolkit\Xml::encode($item->url()) ?></guid>
       <pubDate><?= $datefield === 'modified' ? $item->modified('r', 'date') : date('r', $item->{$datefield}()->toTimestamp()) ?></pubDate>
       <description><![CDATA[<?= $item->{$textfield}()->kirbytext() ?>]]></description>
+      <?php $image = $images && $imagesfield ? $item->{$imagesfield}()->toFiles()->first() : null;
+        if ($image): ?><enclosure url="<?= $image->url() ?>" length="<?= $image->size() ?>" type="<?= $image->mime() ?>" /><?php endif ?>
     </item>
     <?php } ?>
   </channel>
