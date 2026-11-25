@@ -69,7 +69,10 @@
     ]
   },
   "extra": {
-    "kirby-cms-path": "tests/kirby"
+    "kirby-cms-path": "tests/kirby",
+    "kirby": {
+      "compatible": "^5.0 || ^6.0"
+    }
   },
   "suggest": {
     "bnomei/kirby3-htmlhead": "Best-practice HTML Head Element extendable with snippets.",
