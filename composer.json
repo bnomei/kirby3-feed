@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-feed",
   "type": "kirby-plugin",
-  "version": "5.2.0",
+  "version": "6.0.0",
   "description": "Generate a Atom/JSON/RSS-Feed and XML-Sitemap from Pages-Collections",
   "homepage": "https://github.com/bnomei/kirby3-feed",
   "license": "MIT",
@@ -69,7 +69,10 @@
     ]
   },
   "extra": {
-    "kirby-cms-path": "tests/kirby"
+    "kirby-cms-path": "tests/kirby",
+    "kirby": {
+      "compatible": "^5.0 || ^6.0"
+    }
   },
   "suggest": {
     "bnomei/kirby3-htmlhead": "Best-practice HTML Head Element extendable with snippets.",
