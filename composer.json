@@ -43,7 +43,7 @@
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
-    "getkirby/cms": "^5.0.0-alpha.4",
+    "getkirby/cms": "^6.0",
     "larastan/larastan": "^v3.0.0",
     "laravel/pint": "^1.13",
     "pestphp/pest": "^v3.5.1",
@@ -59,14 +59,7 @@
       "composer install --no-dev --optimize-autoloader",
       "git rm -rf --cached .; git add .;"
     ],
-    "kirby": [
-      "composer install",
-      "composer update",
-      "composer install --working-dir=tests/kirby --no-dev --optimize-autoloader",
-      "composer update --working-dir=tests/kirby",
-      "sed -i.bak 's/function dump(/function xdump(/g' tests/kirby/config/helpers.php",
-      "sed -i.bak 's/function e(/function xe(/g' tests/kirby/config/helpers.php"
-    ]
+    "kirby": ["composer install", "sed -i.bak 's/function dump(/function xdump(/g; s/function e(/function xe(/g' tests/kirby/config/helpers.php"]
   },
   "extra": {
     "kirby-cms-path": "tests/kirby",

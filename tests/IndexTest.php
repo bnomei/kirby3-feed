@@ -16,7 +16,7 @@ test('finds feed route', function () {
 test('finds sitemap route', function () {
     $response = kirby()->render('/sitemap.xml');
     expect($response->code() === 200)->toBeTrue()
-        ->and($response->type() === 'text/xml')->toBeTrue()
+        ->and($response->type())->toBe('application/xml')
         ->and($response->body())->toStartWith('<?xml version="1.0" encoding="utf-8"?>');
 });
 

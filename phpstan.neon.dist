@@ -10,6 +10,5 @@ parameters:
         - '#Undefined variable: \$this#'
         - '#Parameter \#1 \$value of function strval expects#'
         - '#Parameter \#1 \$value of function intval expects#'
-        - '#Call to an undefined method Kirby\\Content\\Field::#'
         -
             identifier: missingType.iterableValue

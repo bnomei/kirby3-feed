@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bnomei;
 
 use Closure;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Filesystem\Mime;
@@ -17,6 +18,7 @@ class Feed
 
     private string $string;
 
+    /** @param Pages<Page>|Closure $pages */
     public function __construct(Pages|Closure $pages, array $options = [])
     {
         $this->options = array_merge((array) option('bnomei.feed.defaults')(), ['items' => $pages], $options); // @phpstan-ignore-line
@@ -81,9 +83,6 @@ class Feed
         if (empty($items) || ! ($items instanceof Pages)) {
             throw new \Exception('Feed: items not found or not a Pages Collection.');
         }
-        /** @var Pages $items */
-        $this->options['items'] = $items;
-
         if ($this->options['sort'] === true) {
             $items = $items->sortBy($this->options['datefield'], 'desc');
         }
@@ -94,13 +93,14 @@ class Feed
     {
         $this->options['link'] = url($this->options['link']);
 
-        /** @var Pages $items */
+        /** @var Pages<Page> $items */
         $items = $this->options['items'];
-        if ($items->count()) {
-            $modified = $items->first()->modified($this->options['dateformat'], 'date');
+        $first = $items->first();
+        if ($first !== null) {
+            $modified = $first->modified($this->options['dateformat'], 'date');
             $this->options['modified'] = $modified;
 
-            $datefield = $items->first()->{$this->options['datefield']}();
+            $datefield = $first->{$this->options['datefield']}();
             if ($datefield instanceof Field && $datefield->isNotEmpty()) {
                 $this->options['date'] = $datefield->toDate($this->options['dateformat']);
             }
@@ -130,6 +130,7 @@ class Feed
         return $response ?? new Response('Error: Feed Response', null, 500);
     }
 
+    /** @param Pages<Page>|Closure $pages */
     public static function feed(Pages|Closure $pages, array $options = []): Response
     {
         $feed = new self($pages, $options);

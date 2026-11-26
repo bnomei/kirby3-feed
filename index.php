@@ -1,12 +1,14 @@
 <?php
 
 use Bnomei\Feed;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Http\Response;
 
 @include_once __DIR__.'/vendor/autoload.php';
 
 if (! function_exists('feed')) {
+    /** @param Pages<Page>|Closure $pages */
     function feed(Pages|Closure $pages, array $options = []): Response
     {
         $response = Feed::feed($pages, $options);
@@ -17,6 +19,7 @@ if (! function_exists('feed')) {
 }
 
 if (! function_exists('sitemap')) {
+    /** @param Pages<Page>|Closure $pages */
     function sitemap(Pages|Closure $pages, array $options = []): Response
     {
         $response = Feed::feed($pages, $options + [
